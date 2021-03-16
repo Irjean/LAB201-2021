@@ -4,20 +4,18 @@ const loginBtn = document.querySelector("#login-button");
 
 loginBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    login(mailInput.value, loginBtn.value);
-})
-
-function login(email, password){
-    console.log("ici c bon");
-    firebase.auth().signInWithEmailAndPassword(email, password)
+    firebase.auth().signInWithEmailAndPassword(mailInput.value, pwInput.value)
   .then((userCredential) => {
     // Signed in
     console.log("successfully logged in !");
     var user = userCredential.user;
+    window.location.href = "../pages/admin.html"
     
   })
   .catch((error) => {
     var errorCode = error.code;
     var errorMessage = error.message;
+    alert(errorMessage);
   });
-}
+})
+
