@@ -25,4 +25,3 @@ imgBtn.addEventListener("click", ()=>{
     image.src = window.URL.createObjectURL(fileInput.files[0]);
     showImg.appendChild(image);
 })
-
