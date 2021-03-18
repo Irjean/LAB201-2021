@@ -47,3 +47,7 @@ main{
 main button{
     border-radius: 5px;
 }
+
+.btn-outline-info:hover{
+    color: white;
+}

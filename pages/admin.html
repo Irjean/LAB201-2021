@@ -24,6 +24,7 @@
         <section id="blog" class="hidden blog-class">
             <div class="d-flex flex-column w-75 m-auto mt-5">
                 <h2>Gérer le blog</h2>
+                <button id="add-article-button" class="button btn-primary" style="width: 10%;">Add</button>
                 <hr style="color: black;">
                 <table class="table m-auto">
                     <thead>
@@ -33,45 +34,14 @@
                       <th>Article</th>
                       <th></th>
                     </thead>
-                    <tbody>
-                        <tr id="article">
-                            <td>0</td>
-                            <td>image</td>
-                            <td>La vie est une pute</td>
-                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad alias a, ducimus harum autem dolor. Quibusdam rem voluptas, eos consequuntur dolor esse perspiciatis eius id corporis atque, facilis, non maiores!</td>
-                            <td><button class="button btn-outline-info p-1">Edit</button><button class="button btn-outline-danger p-1">Delete</button></td>
-                        </tr>
-                        <tr id="article">
-                            <td>1</td>
-                            <td>image</td>
-                            <td>La vie est une pute</td>
-                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad alias a, ducimus harum autem dolor. Quibusdam rem voluptas, eos consequuntur dolor esse perspiciatis eius id corporis atque, facilis, non maiores!</td>
-                            <td><button class="button btn-outline-info p-1">Edit</button><button class="button btn-outline-danger p-1">Delete</button></td>
-                        </tr>
-                        <tr id="article">
-                            <td>2</td>
-                            <td>image</td>
-                            <td>La vie est une pute</td>
-                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad alias a, ducimus harum autem dolor. Quibusdam rem voluptas, eos consequuntur dolor esse perspiciatis eius id corporis atque, facilis, non maiores!</td>
-                            <td><button class="button btn-outline-info p-1">Edit</button><button class="button btn-outline-danger p-1">Delete</button></td>
-                        </tr>
-                        <tr id="article">
-                            <td>3</td>
-                            <td>image</td>
-                            <td>La vie est une pute</td>
-                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad alias a, ducimus harum autem dolor. Quibusdam rem voluptas, eos consequuntur dolor esse perspiciatis eius id corporis atque, facilis, non maiores!</td>
-                            <td><button class="button btn-outline-info p-1">Edit</button><button class="button btn-outline-danger p-1">Delete</button></td>
-                        </tr>
+                    <tbody id="article-list">
+                        
                     </tbody>
                 </table>
-                <div>
-                    <div id="afficher-image">
-                        <h3>Image</h3>
-                        <input type="file" id="file-input">
-                        <button id="image-button">Afficher</button>
-                    </div>
-                </div>
             </div> 
+        </section>
+        <section id="add-article-page">
+            
         </section>
         <section id="dates" class="hidden">
             <div>
@@ -84,6 +54,8 @@
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-storage.js"></script>
     <script>
         // Your web app's Firebase configuration
         // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -99,6 +71,10 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
+
+        
+        var db = firebase.firestore();
+
     </script>
     <script src="../js/admin.js"></script>
 </body>
