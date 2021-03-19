@@ -3,66 +3,121 @@ const blogPage = document.querySelector("#blog");
 const datesBtn = document.querySelector("#dates-button");
 const datesPage = document.querySelector("#dates");
 const articleList = document.querySelector("#article-list");
+const addArticleBtnPage = document.querySelector("#add-article-button-page");
+const addArticlePage = document.querySelector("#add-article-page");
+const articleBackBtn = document.querySelector("#back-button-article");
+const articleImg = document.querySelector("#article-image");
+const articleTitle = document.querySelector("#article-title");
+const articleArticle = document.querySelector("#article-article");
+const addArticleBtn = document.querySelector("#add-article-btn");
+const articles = [];
 
-const articles = [
-    {
-        ID: 0,
-        image: "image",
-        titre: "je suis sérieux",
-        article: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad alias a, ducimus harum autem dolor. Quibusdam rem voluptas, eos consequuntur dolor esse perspiciatis eius id corporis atque, facilis, non maiores!"
-    },
-    {
-        ID: 1,
-        image: "image",
-        titre: "je suis motivé",
-        article: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad alias a, ducimus harum autem dolor. Quibusdam rem voluptas, eos consequuntur dolor esse perspiciatis eius id corporis atque, facilis, non maiores!"
-    },
-    {
-        ID: 2,
-        image: "image",
-        titre: "embauchez moi la",
-        article: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad alias a, ducimus harum autem dolor. Quibusdam rem voluptas, eos consequuntur dolor esse perspiciatis eius id corporis atque, facilis, non maiores!"
-    }
-]
+window.onload = () => {
+    getArticleFromFirestore();
+};
 
 blogBtn.addEventListener("click", (e) => {
     e.preventDefault();
     blogPage.classList.add("blog-class");
     datesPage.classList.remove("dates-class");
+    addArticlePage.classList.remove("add-article");
 });
 
 datesBtn.addEventListener("click", (e) => {
     e.preventDefault();
     datesPage.classList.add("dates-class");
     blogPage.classList.remove("blog-class");
+    addArticlePage.classList.remove("add-article");
 })
 
-window.onload = () => {
-    let html = showArticles(articles);
-    articleList.innerHTML += html;
-};
+addArticleBtnPage.addEventListener("click", () => {
+    blogPage.classList.remove("blog-class");
+    addArticlePage.classList.add("add-article");
+})
+
+articleBackBtn.addEventListener("click", () => {
+    blogPage.classList.add("blog-class");
+    datesPage.classList.remove("dates-class");
+    addArticlePage.classList.remove("add-article");
+})
+
+addArticleBtn.addEventListener("click", addNewArticle);
+
+blogPage.addEventListener("click", (e)=>{
+    console.log(e)
+})
+
+function getArticleFromFirestore(){
+    db.collection("articles").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            let data = doc.data();
+            articles.push(data);
+        });
+        let html = showArticles(articles)
+        articleList.innerHTML += html;
+    });
+}
 
 function showArticles(articles){
-    
    return articles.map(i => {
         return `
-        <tr id="article">
+        <tr>
                             <td>${i.ID}</td>
                             <td>${i.image}</td>
                             <td>${i.titre}</td>
                             <td>${i.article}</td>
-                            <td><button class="button btn-outline-info p-1 mb-1">Edit</button><button class="button btn-outline-danger p-1">Delete</button></td>
+                            <td><button id="edit-button" class="button btn-outline-info p-1 mb-1">Edit</button><button id="delete-button" class="button btn-outline-danger p-1">Delete</button></td>
                         </tr>
         `;
     }).join("");
 };
 
+function updateArticleList(id, image, titre, article){
+    return `
+        <tr id="article">
+                            <td>${id}</td>
+                            <td>${image}</td>
+                            <td>${titre}</td>
+                            <td>${article}</td>
+                            <td><button class="button btn-outline-info p-1 mb-1">Edit</button><button class="button btn-outline-danger p-1">Delete</button></td>
+                        </tr>
+        `;
+}
 
-var docRef = db.collection("users");
+function addNewArticle(){
+    console.log(articles.length)
+    let id = articles.length.toString();
+    let image = "image";
+    let title = articleTitle.value;
+    let article = articleArticle.value;
 
-db.collection("users").get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
+    db.collection("articles").doc(id).set({
+        ID: articles.length,
+        image: image,
+        titre: title,
+        article: article
+    })
+    .then(() => {
+        alert("Article créé avec succés !");
+    })
+    .catch((error) => {
+        alert("Erreur lors de la création de l'article: ", error);
     });
-});
+
+    articleTitle.value = "";
+    articleArticle.value = "";
+
+    articles[articles.length] = {
+        ID: article.length,
+        image: image,
+        titre: title,
+        article: article
+    }
+
+    let html = updateArticleList(id, image, title, article);
+    articleList.innerHTML += html;
+
+    blogPage.classList.add("blog-class");
+    datesPage.classList.remove("dates-class");
+    addArticlePage.classList.remove("add-article");
+}

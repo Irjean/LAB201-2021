@@ -24,7 +24,7 @@
         <section id="blog" class="hidden blog-class">
             <div class="d-flex flex-column w-75 m-auto mt-5">
                 <h2>Gérer le blog</h2>
-                <button id="add-article-button" class="button btn-primary" style="width: 10%;">Add</button>
+                <button id="add-article-button-page" class="button btn-primary" style="width: 10%;">Add</button>
                 <hr style="color: black;">
                 <table class="table m-auto">
                     <thead>
@@ -40,8 +40,18 @@
                 </table>
             </div> 
         </section>
-        <section id="add-article-page">
-            
+        <section id="add-article-page" class="hidden flex-column w-50 mt-5" style="margin-left: 200px;">
+            <h2>Créer un article</h2>
+            <button id="back-button-article" class="button btn-primary" style="width: 10%;">Retour</button>
+            <hr>
+            <h3 class="mb-2">Titre</h3>
+            <input id="article-title" class="w-50 mb-2" type="text">
+            <!--<h3 class="mb-2">Image</h3>
+            <div style="height: 200px;"></div>
+            <input id="article-image" class="w-50 mb-2" type="file">-->
+            <h3 class="mb-2">Article</h3>
+            <textarea id="article-article" style="height: 300px; text-align: start; margin-bottom: 10px;" type="text"></textarea>
+            <a href="#"><button id="add-article-btn" class="button btn-primary w-25">Créer</button></a>
         </section>
         <section id="dates" class="hidden">
             <div>
