@@ -30,13 +30,15 @@ blogBtn.addEventListener("click", (e) => {
     blogPage.classList.add("blog-class");
     datesPage.classList.remove("dates-class");
     addArticlePage.classList.remove("add-article");
+    editArticlePage.classList.remove("edit-article-class");
 });
 
 datesBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    datesPage.classList.add("dates-class");
     blogPage.classList.remove("blog-class");
+    datesPage.classList.add("dates-class");
     addArticlePage.classList.remove("add-article");
+    editArticlePage.classList.remove("edit-article-class");
 })
 
 addArticleBtnPage.addEventListener("click", () => {
