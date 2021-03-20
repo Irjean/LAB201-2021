@@ -9,6 +9,31 @@
 </head>
 <body>
     <a href="./pages/login.html"><button id="login-button">Login</button></a>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-storage.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+          apiKey: "AIzaSyCtr0RkMGMJAbCJaEyWipLjPKeMmMK28dI",
+          authDomain: "lab201-2021.firebaseapp.com",
+          projectId: "lab201-2021",
+          storageBucket: "lab201-2021.appspot.com",
+          messagingSenderId: "166186580563",
+          appId: "1:166186580563:web:9a455becfc415a040ce4a6",
+          measurementId: "G-CT4FPZXR6D"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        
+        var db = firebase.firestore();
+
+    </script>
     <script src="js/index.js"></script>
 </body>
 </html>
