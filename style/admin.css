@@ -59,3 +59,16 @@ main button{
 .btn-outline-info:hover{
     color: white;
 }
+
+.spin{
+    animation: spin linear 1s infinite;
+}
+
+@keyframes spin{
+    from{
+        transform: rotate(0turn);
+    }
+    to{
+        transform: rotate(1turn);
+    }
+}

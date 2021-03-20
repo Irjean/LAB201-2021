@@ -46,9 +46,9 @@
             <hr>
             <h3 class="mb-2">Titre</h3>
             <input id="article-title" class="w-50 mb-2" type="text">
-            <!--<h3 class="mb-2">Image</h3>
-            <div style="height: 200px;"></div>
-            <input id="article-image" class="w-50 mb-2" type="file">-->
+            <h3 class="mb-2">Image</h3>
+            <div id="preview-img" style="height: 200px;"></div>
+            <input id="article-image" class="w-50 mb-2" type="file">
             <h3 class="mb-2">Article</h3>
             <textarea id="article-article" style="height: 300px; text-align: start; margin-bottom: 10px;" type="text"></textarea>
             <a href="#"><button id="add-article-btn" class="button btn-primary w-25">Créer</button></a>
@@ -61,9 +61,9 @@
             <span id="edit-ID"></span>
             <h3 class="mb-2">Titre</h3>
             <input id="edit-article-title" class="w-50 mb-2" type="text" autocomplete="off">
-            <!--<h3 class="mb-2">Image</h3>
-            <div style="height: 200px;"></div>
-            <input id="edit-article-image" class="w-50 mb-2" type="file">-->
+            <h3 class="mb-2">Image</h3>
+            <div id="edit-preview-image" style="height: 200px;"><img width="200px" src="" alt="image"></div>
+            <input id="edit-article-image" class="w-50 mb-2" type="file">
             <h3 class="mb-2">Article</h3>
             <textarea id="edit-article-article" style="height: 300px; text-align: start; margin-bottom: 10px;" type="text" autocomplete="off"></textarea>
             <a href="#"><button id="edit-article-btn" class="button btn-primary w-25">Modifier</button></a>
@@ -96,10 +96,8 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
-
-        
         var db = firebase.firestore();
-
+        var storage = firebase.storage();
     </script>
     <script src="../js/admin.js"></script>
 </body>
