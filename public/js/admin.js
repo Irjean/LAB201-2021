@@ -1,7 +1,9 @@
-//--------------QUERY SELECTIONS----------------------------------------------------
 window.onload = () => {
     getArticleFromFirestore();
 };
+
+//--------------QUERY SELECTIONS----------------------------------------------------
+
 const blogBtn = document.querySelector("#blog-button");
 const blogPage = document.querySelector("#blog");
 const datesBtn = document.querySelector("#dates-button");
@@ -10,6 +12,8 @@ const articleList = document.querySelector("#article-list");
 const addArticleBtnPage = document.querySelector("#add-article-button-page");
 const addArticlePage = document.querySelector("#add-article-page");
 const editArticlePage = document.querySelector("#edit-article-page");
+const editArticleImg = document.querySelector("#edit-article-image");
+const editPreviewImg = document.querySelector("#edit-preview-image");
 const editID = document.querySelector("#edit-ID");
 const editTitle = document.querySelector("#edit-article-title");
 const editArticle = document.querySelector("#edit-article-article");
@@ -18,8 +22,11 @@ const articleBackBtn = document.querySelector("#back-button-article");
 const articleImg = document.querySelector("#article-image");
 const articleTitle = document.querySelector("#article-title");
 const articleArticle = document.querySelector("#article-article");
-const addArticleBtn = document.querySelector("#add-article-btn");
+const addArticleBtn = document.querySelector("#add-article-btn")
+const addArticlePreviewImg = document.querySelector("#preview-img");
+
 let articles = [];
+let imgURL = "";
 
 //----------------------EVENT LISTENERS--------------------------------------------
 
@@ -42,6 +49,8 @@ datesBtn.addEventListener("click", (e) => {
 })
 
 addArticleBtnPage.addEventListener("click", () => {
+    articleImg.value = "";
+    addArticlePreviewImg.innerHTML = "";
     blogPage.classList.remove("blog-class");
     addArticlePage.classList.add("add-article");
 })
@@ -51,6 +60,7 @@ articleBackBtn.addEventListener("click", () => {
     datesPage.classList.remove("dates-class");
     addArticlePage.classList.remove("add-article");
     editArticlePage.classList.remove("edit-article-class");
+    articleImg.value = "";
 })
 
 addArticleBtn.addEventListener("click", addNewArticle);
@@ -77,6 +87,7 @@ blogPage.addEventListener("click", (e)=>{
         let article = articles[id].article;
 
         editID.innerHTML = id;
+        editPreviewImg.firstChild.src = image;
         editTitle.value = title;
         editArticle.value = article;
         
@@ -96,7 +107,7 @@ editArticlePage.addEventListener("click", (e) => {
 
 editArticleBtn.addEventListener("click", () => {
     let id = editID.innerHTML;
-    let image = "image";
+    let image = imgURL;
     let title = editTitle.value;
     let article = editArticle.value;
 
@@ -134,6 +145,54 @@ editArticleBtn.addEventListener("click", () => {
     editArticlePage.classList.remove("edit-article-class");
 })
 
+articleImg.addEventListener("change", () => {
+    addArticlePreviewImg.innerHTML = '<i class="fas fa-spinner spin"></i>'
+    let image = articleImg.files[0];
+    let imgPath = `images/${image.name}`;
+    let imageStorage = firebase.storage().ref(imgPath);
+    let uploadImg = imageStorage.put(image);
+    uploadImg.on("state_changed", 
+    () => {
+        //Pendant l'upload
+        
+    },
+    (error) => {
+        //Erreur
+    },
+    () => {
+        //Succes
+        imageStorage.getDownloadURL()
+    .then((url) => {
+        imgURL = url;
+        addArticlePreviewImg.innerHTML = `<img height="200px" src="${imgURL}" alt="minecraft">`
+    })
+    })
+})
+
+editArticleImg.addEventListener("change", () => {
+    editPreviewImg.innerHTML = '<i class="fas fa-spinner spin"></i>'
+    let image = editArticleImg.files[0];
+    let imgPath = `images/${image.name}`;
+    let imageStorage = firebase.storage().ref(imgPath);
+    let uploadImg = imageStorage.put(image);
+    uploadImg.on("state_changed", 
+    () => {
+        //Pendant l'upload
+        
+    },
+    (error) => {
+        //Erreur
+    },
+    () => {
+        //Succes
+        imageStorage.getDownloadURL()
+    .then((url) => {
+        imgURL = url;
+        editPreviewImg.innerHTML = `<img height="200px" src="${imgURL}" alt="minecraft">`
+    })
+    })
+})
+
 //----------------FUNCTIONS----------------------------------------------------
 
 function getArticleFromFirestore(){
@@ -153,7 +212,7 @@ function showArticles(articles){
         return `
         <tr>
                             <td>${i.ID}</td>
-                            <td>${i.image}</td>
+                            <td><img src="${i.image}" alt="image" width="200px"></td>
                             <td>${i.titre}</td>
                             <td>${i.article}</td>
                             <td><button value="${i.ID}" id="edit-button" class="button btn-outline-info p-1 m-1">Edit</button><button value="${i.ID}" id="delete-button" class="button btn-outline-danger p-1">Delete</button></td>
@@ -173,13 +232,13 @@ function addNewArticle(){
             id = (i+1).toString();
         }
     }
-    let image = "image";
+    
     let title = articleTitle.value;
     let article = articleArticle.value;
 
     db.collection("articles").doc(id || "0").set({
         ID: Number(id),
-        image: image,
+        image: imgURL,
         titre: title,
         article: article
     })
@@ -195,7 +254,7 @@ function addNewArticle(){
 
     articles[articles.length] = {
         ID: Number(id),
-        image: image,
+        image: imgURL,
         titre: title,
         article: article
     }
