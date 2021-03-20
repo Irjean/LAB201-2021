@@ -1,3 +1,7 @@
+//--------------QUERY SELECTIONS----------------------------------------------------
+window.onload = () => {
+    getArticleFromFirestore();
+};
 const blogBtn = document.querySelector("#blog-button");
 const blogPage = document.querySelector("#blog");
 const datesBtn = document.querySelector("#dates-button");
@@ -5,6 +9,11 @@ const datesPage = document.querySelector("#dates");
 const articleList = document.querySelector("#article-list");
 const addArticleBtnPage = document.querySelector("#add-article-button-page");
 const addArticlePage = document.querySelector("#add-article-page");
+const editArticlePage = document.querySelector("#edit-article-page");
+const editID = document.querySelector("#edit-ID");
+const editTitle = document.querySelector("#edit-article-title");
+const editArticle = document.querySelector("#edit-article-article");
+const editArticleBtn = document.querySelector("#edit-article-btn");
 const articleBackBtn = document.querySelector("#back-button-article");
 const articleImg = document.querySelector("#article-image");
 const articleTitle = document.querySelector("#article-title");
@@ -12,9 +21,9 @@ const articleArticle = document.querySelector("#article-article");
 const addArticleBtn = document.querySelector("#add-article-btn");
 let articles = [];
 
-window.onload = () => {
-    getArticleFromFirestore();
-};
+//----------------------EVENT LISTENERS--------------------------------------------
+
+
 
 blogBtn.addEventListener("click", (e) => {
     e.preventDefault();
@@ -39,6 +48,7 @@ articleBackBtn.addEventListener("click", () => {
     blogPage.classList.add("blog-class");
     datesPage.classList.remove("dates-class");
     addArticlePage.classList.remove("add-article");
+    editArticlePage.classList.remove("edit-article-class");
 })
 
 addArticleBtn.addEventListener("click", addNewArticle);
@@ -54,11 +64,76 @@ blogPage.addEventListener("click", (e)=>{
             alert("L'article n'a pas pu être supprimé : ", error);
         }); 
         e.target.parentNode.parentNode.remove();
-        console.log(id, articles[id].ID)
         articles = articles.filter(i => i.ID !== Number(id));
     }
         }
+    if(e.target.id === "edit-button"){
+        blogPage.classList.remove("blog-class");
+        editArticlePage.classList.add("edit-article-class");
+        let id = e.target.value;
+        let title = articles[id].titre;
+        let image = articles[id].image;
+        let article = articles[id].article;
+
+        editID.innerHTML = id;
+        editTitle.setAttribute("value", `${title}`);
+        editArticle.innerHTML = article;
+    }
 })
+
+editArticlePage.addEventListener("click", (e) => {
+    if(e.target.id === "back-button-article"){
+        blogPage.classList.add("blog-class");
+    datesPage.classList.remove("dates-class");
+    addArticlePage.classList.remove("add-article");
+    editArticlePage.classList.remove("edit-article-class");
+    }
+})
+
+editArticleBtn.addEventListener("click", () => {
+    let id = editID.innerHTML;
+    let image = "image";
+    let title = editTitle.value;
+    let article = editArticle.value;
+
+    articles[id] = {
+        ID: Number(id),
+        image: image,
+        titre: title,
+        article: article
+    }
+
+    db.collection("articles").doc(`${id}`).set({
+        ID: Number(id),
+        image: image,
+        titre: title,
+        article: article
+    })
+    .then(() => {
+        alert("Article modifié avec succés !");
+    })
+    .catch((error) => {
+        alert("Erreur lors de la modification de l'article: ", error);
+    });
+
+    let html = showArticles(articles);
+    articleList.innerHTML = "";
+    articleList.innerHTML += html;
+
+    blogPage.classList.add("blog-class");
+    datesPage.classList.remove("dates-class");
+    addArticlePage.classList.remove("add-article");
+
+    blogPage.classList.add("blog-class");
+    datesPage.classList.remove("dates-class");
+    addArticlePage.classList.remove("add-article");
+    editArticlePage.classList.remove("edit-article-class");
+
+    editTitle.value = "";
+    editArticle.value = "";
+})
+
+//----------------FUNCTIONS----------------------------------------------------
 
 function getArticleFromFirestore(){
     docRef = db.collection("articles").orderBy("ID", "asc");
@@ -89,18 +164,14 @@ function showArticles(articles){
 function addNewArticle(){
     let id = 0;
     for(let i = 0; i < articles.length; i++){
-        console.log(i, articles[i].ID,  "C LE DECOMPTE LA");
         if(articles[i].ID !== i){
-            console.log(i, articles[i].ID,  "C PAS PAREIL");
             id = i.toString();
             break;
         }
         if((i+1) === articles.length){
-            console.log("C LA FIN")
             id = (i+1).toString();
         }
     }
-    console.log(id)
     let image = "image";
     let title = articleTitle.value;
     let article = articleArticle.value;

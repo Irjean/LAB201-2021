@@ -48,6 +48,10 @@ main{
     display: flex;
 }
 
+.edit-article-class{
+    display: flex;
+}
+
 main button{
     border-radius: 5px;
 }
