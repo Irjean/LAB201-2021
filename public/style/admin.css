@@ -1,0 +1,61 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 150%;
+  }
+
+body{
+    font-family: "Roboto", sans-serif;
+}
+
+aside{
+    width: 15%;
+}
+
+main{
+    width: 85%;
+    background-color: rgb(241, 235, 235);
+}
+
+#links button{
+    width: 30%;
+    font-size: 1.5rem;
+    background: none;
+    border: none
+}
+
+#links button i{
+    margin-right: 5px;
+}
+
+.hidden{
+    display: none;
+}
+
+.blog-class{
+    display: block;
+}
+
+.dates-class{
+    display: block;
+}
+
+.add-article{
+    display: flex;
+}
+
+.edit-article-class{
+    display: flex;
+}
+
+main button{
+    border-radius: 5px;
+}
+
+.btn-outline-info:hover{
+    color: white;
+}

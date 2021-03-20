@@ -1,0 +1,34 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: rgb(241, 235, 235);
+}
+
+form{
+    width: 15%;
+}
+
+input{
+    border: 1.5px solid black;
+}
+
+button{
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#input-mail{
+    box-shadow: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+#input-pw{
+    box-shadow: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
