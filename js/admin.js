@@ -70,16 +70,18 @@ blogPage.addEventListener("click", (e)=>{
     }
         }
     if(e.target.id === "edit-button"){
-        blogPage.classList.remove("blog-class");
-        editArticlePage.classList.add("edit-article-class");
+        
         let id = e.target.value;
         let title = articles[id].titre;
         let image = articles[id].image;
         let article = articles[id].article;
 
         editID.innerHTML = id;
-        editTitle.setAttribute("value", `${title}`);
-        editArticle.innerHTML = article;
+        editTitle.value = title;
+        editArticle.value = article;
+        
+        blogPage.classList.remove("blog-class");
+        editArticlePage.classList.add("edit-article-class");
     }
 })
 
@@ -130,9 +132,6 @@ editArticleBtn.addEventListener("click", () => {
     datesPage.classList.remove("dates-class");
     addArticlePage.classList.remove("add-article");
     editArticlePage.classList.remove("edit-article-class");
-
-    editTitle.value = "";
-    editArticle.value = "";
 })
 
 //----------------FUNCTIONS----------------------------------------------------
