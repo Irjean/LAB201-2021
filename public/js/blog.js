@@ -1,5 +1,15 @@
 window.onload = () => {
     getArticleFromFirestore();
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          identifyUser()
+        } else {
+          // No user is signed in.
+          console.log("oui")
+        }
+      });
+      
 };
 
 //--------------QUERY SELECTIONS----------------------------------------------------
@@ -25,6 +35,10 @@ const articleArticle = document.querySelector("#article-article");
 const addArticleBtn = document.querySelector("#add-article-btn")
 const addArticlePreviewImg = document.querySelector("#preview-img");
 
+const userImg = document.querySelector("#user-image");
+const userWelcome = document.querySelector("#user-welcome");
+
+let user = {};
 let articles = [];
 let imgURL = "";
 
@@ -38,6 +52,8 @@ blogBtn.addEventListener("click", (e) => {
     datesPage.classList.remove("dates-class");
     addArticlePage.classList.remove("add-article");
     editArticlePage.classList.remove("edit-article-class");
+    addDatePage.classList.remove("add-date");
+    editDatePage.classList.remove("edit-date-class");
 });
 
 datesBtn.addEventListener("click", (e) => {
@@ -270,18 +286,27 @@ function addNewArticle(){
     addArticlePage.classList.remove("add-article");
 }
 
-function deleteArticle(articleIDnum){
-
-    let articleID = articleIDnum.toString();
-
-    db.collection("cities").doc(articleID).delete()
-    .then(() => {
-        alert("Article supprimé !");
-    }).catch((error) => {
-        console.error("Erreur lors de la suppression: ", error);
-    });
-}
-
 function sortNum(a, b){
     return a.ID - b.ID;
 }
+
+function identifyUser(){
+    user = firebase.auth().currentUser;
+    userEmail = user.email;
+    
+
+    db.collection("users").doc(userEmail).get()
+    .then((response) => {
+        let name = response.data().name;
+        let role = response.data().role;
+        let image = response.data().image;
+
+        userImg.src = image
+        userWelcome.innerHTML = `
+        <h1  class="mb-2" style="font-size: 1.8rem;">Bienvenue ${name} !</h1>
+        <span class="mb-2" style="text-align: center; font-size: 1.5rem;">${role}</span>
+        `
+        });
+}
+
+

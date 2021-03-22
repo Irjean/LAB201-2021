@@ -36,19 +36,12 @@ main{
     display: none;
 }
 
-.blog-class{
+.blog-class, .dates-class{
     display: block;
 }
 
-.dates-class{
-    display: block;
-}
 
-.add-article{
-    display: flex;
-}
-
-.edit-article-class{
+.add-article, .add-date, .edit-article-class, .edit-date-class{
     display: flex;
 }
 
