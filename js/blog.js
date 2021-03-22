@@ -38,6 +38,8 @@ blogBtn.addEventListener("click", (e) => {
     datesPage.classList.remove("dates-class");
     addArticlePage.classList.remove("add-article");
     editArticlePage.classList.remove("edit-article-class");
+    addDatePage.classList.remove("add-date");
+    editDatePage.classList.remove("edit-date-class");
 });
 
 datesBtn.addEventListener("click", (e) => {
@@ -268,18 +270,6 @@ function addNewArticle(){
     blogPage.classList.add("blog-class");
     datesPage.classList.remove("dates-class");
     addArticlePage.classList.remove("add-article");
-}
-
-function deleteArticle(articleIDnum){
-
-    let articleID = articleIDnum.toString();
-
-    db.collection("cities").doc(articleID).delete()
-    .then(() => {
-        alert("Article supprimé !");
-    }).catch((error) => {
-        console.error("Erreur lors de la suppression: ", error);
-    });
 }
 
 function sortNum(a, b){
