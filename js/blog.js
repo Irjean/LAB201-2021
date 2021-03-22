@@ -5,8 +5,7 @@ window.onload = () => {
           // User is signed in.
           identifyUser()
         } else {
-          // No user is signed in.
-          console.log("oui")
+          window.location.href = "./login.html"
         }
       });
       
@@ -309,4 +308,10 @@ function identifyUser(){
         });
 }
 
-
+function logout(){
+    firebase.auth().signOut().then(() => {
+        window.location.href = "./login.html"
+      }).catch((error) => {
+        // An error happened.
+      });
+}
