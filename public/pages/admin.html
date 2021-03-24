@@ -54,9 +54,11 @@
             <h3 class="mb-2">Image</h3>
             <div id="preview-img" style="height: 200px;"></div>
             <input id="article-image" class="w-50 mb-2" type="file">
-            <h3 class="mb-2">Article</h3>
-            <textarea id="article-article" style="height: 300px; text-align: start; margin-bottom: 10px; background-color: white; border: 1px solid black"></textarea>
-            <a href="#"><button id="add-article-btn" class="button btn-primary w-25">Créer</button></a>
+           
+            <h3 class="mb-2">Article</h3> 
+            <div><button id="gras">Gras</button><button>Italics</button></div>
+            <textarea id="article-article" style="height: 300px; text-align: start; margin-bottom: 10px; text-align: center;"></textarea>
+            <div><a href="#"><button id="add-article-btn" class="button btn-primary w-25">Créer</button></a><button id="add-article-preview">Prévisualiser</button></div>
         </section>
         <section id="edit-article-page" class="hidden flex-column w-50 m-auto mt-5">
             <h2>Modifier un article</h2>
@@ -70,14 +72,15 @@
             <div id="edit-preview-image" style="height: 200px;"><img height="200px" src="" alt="image"></div>
             <input id="edit-article-image" class="w-50 mb-2" type="file">
             <h3 class="mb-2">Article</h3>
-            <textarea id="edit-article-article" style="height: 300px; text-align: start; margin-bottom: 10px;" type="text" autocomplete="off"></textarea>
+            <div><button>Gras</button><button>Italics</button></div>
+            <textarea id="edit-article-article" style="height: 300px; text-align: start; margin-bottom: 10px; text-align: center;" type="text" autocomplete="off"></textarea>
             <a href="#"><button id="edit-article-btn" class="button btn-primary w-25">Modifier</button></a>
         </section>
         <section id="dates" class="hidden w-50 m-auto mt-5" style="margin-left: 200px;">
             <div>
                 <div class="d-flex flex-column w-75 m-auto mt-5">
                     <h2>Gérer les dates</h2>
-                    <button id="add-date-button-page" class="button btn-primary" style="width: 10%; margin-left: 82%">Add</button>
+                    <button id="add-date-button-page" class="button btn-primary" style="width: 10%; margin-left: 82.2%">Add</button>
                     <hr style="color: black;">
                     <table class="table m-auto">
                         <thead>
@@ -115,6 +118,7 @@
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     <script src="../modules/font-awesome/js/all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-auth.js"></script>

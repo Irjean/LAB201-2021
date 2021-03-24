@@ -20,13 +20,7 @@ const datesPage = document.querySelector("#dates");
 const articleList = document.querySelector("#article-list");
 const addArticleBtnPage = document.querySelector("#add-article-button-page");
 const addArticlePage = document.querySelector("#add-article-page");
-const editArticlePage = document.querySelector("#edit-article-page");
-const editArticleImg = document.querySelector("#edit-article-image");
-const editPreviewImg = document.querySelector("#edit-preview-image");
-const editID = document.querySelector("#edit-ID");
-const editTitle = document.querySelector("#edit-article-title");
-const editArticle = document.querySelector("#edit-article-article");
-const editArticleBtn = document.querySelector("#edit-article-btn");
+// Add New Article Page
 const articleBackBtn = document.querySelector("#back-button-article");
 const articleDate = document.querySelector("#article-date");
 const articleImg = document.querySelector("#article-image");
@@ -34,6 +28,17 @@ const articleTitle = document.querySelector("#article-title");
 const articleArticle = document.querySelector("#article-article");
 const addArticleBtn = document.querySelector("#add-article-btn")
 const addArticlePreviewImg = document.querySelector("#preview-img");
+// Edit Article Page
+const editArticlePage = document.querySelector("#edit-article-page");
+const editArticleImg = document.querySelector("#edit-article-image");
+const editPreviewImg = document.querySelector("#edit-preview-image");
+const editID = document.querySelector("#edit-ID");
+const editTitle = document.querySelector("#edit-article-title");
+const editArticle = document.querySelector("#edit-article-article");
+const editArticleBtn = document.querySelector("#edit-article-btn");
+//Preview Page
+const addPreview = document.querySelector("#add-article-preview");
+
 
 const userImg = document.querySelector("#user-image");
 const userWelcome = document.querySelector("#user-welcome");
@@ -208,6 +213,16 @@ editArticleImg.addEventListener("change", () => {
     })
 })
 
+addPreview.addEventListener("click", () => {
+    let title = articleTitle.value;
+    let article = articleArticle.value;
+
+    localStorage.setItem("img", imgURL);
+    localStorage.setItem("title", title);
+    localStorage.setItem("article", article);
+    window.location = "./article.html"
+})
+
 //----------------FUNCTIONS----------------------------------------------------
 
 function getArticleFromFirestore(){
@@ -290,4 +305,27 @@ function logout(){
       }).catch((error) => {
         // An error happened.
       });
+}
+
+//-----------------------------JQUERY------------------------------------------------------------------
+
+const button = $("#gras");
+
+button.on("click", () => {
+    console.log("click")
+$("#article-article").replaceWith(`<textarea id="article-article" style="height: 300px; text-align: start; margin-bottom: 10px; text-align: center;" type="text" autocomplete="off">${getSelectionText()}</textarea>`)
+})
+function getSelectionText() {
+  if (window.getSelection) {
+    try {
+        console.log("eheh")
+      var ta = $("#article-article").get(0);
+      let str = ta.value
+      let selText = ta.value.substring(ta.selectionStart, ta.selectionEnd);
+      console.log(selText, str)
+      return str.replace(selText, `<bold>${selText}</bold>`)
+    } catch (e) {
+      console.log('Cant get selection text')
+    }
+  }
 }

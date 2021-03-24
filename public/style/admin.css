@@ -40,6 +40,10 @@ h2{
     display: none;
 }
 
+.sauce:hover{
+    opacity: 0;
+}
+
 .blog-class, .dates-class{
     display: block;
 }
