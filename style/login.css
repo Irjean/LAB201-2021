@@ -12,23 +12,16 @@ form{
     width: 15%;
 }
 
-input{
-    border: 1.5px solid black;
+
+#input-mail, #input-pw{
+    box-shadow: none;
+    border: none;
+    padding: 5px;
 }
 
 button{
-    border: 1px solid black;
+    border: none;
     border-radius: 5px;
-}
-
-#input-mail{
     box-shadow: none;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-
-#input-pw{
-    box-shadow: none;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    padding-bottom: 1.5px;
 }

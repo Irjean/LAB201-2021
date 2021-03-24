@@ -28,6 +28,7 @@ const editTitle = document.querySelector("#edit-article-title");
 const editArticle = document.querySelector("#edit-article-article");
 const editArticleBtn = document.querySelector("#edit-article-btn");
 const articleBackBtn = document.querySelector("#back-button-article");
+const articleDate = document.querySelector("#article-date");
 const articleImg = document.querySelector("#article-image");
 const articleTitle = document.querySelector("#article-title");
 const articleArticle = document.querySelector("#article-article");
@@ -64,6 +65,7 @@ datesBtn.addEventListener("click", (e) => {
 })
 
 addArticleBtnPage.addEventListener("click", () => {
+    articleDate.innerHTML = todayDate;
     articleImg.value = "";
     addArticlePreviewImg.innerHTML = "";
     blogPage.classList.remove("blog-class");
@@ -81,33 +83,39 @@ articleBackBtn.addEventListener("click", () => {
 addArticleBtn.addEventListener("click", addNewArticle);
 
 blogPage.addEventListener("click", (e)=>{
-    let id = e.target.value;
+    let date = e.target.value;
     if(e.target.id === "delete-button"){
         if(confirm("Voulez-vous vraiment supprimer l'article ?")){
-          db.collection("articles").doc(id).delete()
+          db.collection("articles").doc(date).delete()
         .then(() => {
             alert("Article supprimé !");
         }).catch((error) => {
             alert("L'article n'a pas pu être supprimé : ", error);
         }); 
-        e.target.parentNode.parentNode.remove();
-        articles = articles.filter(i => i.ID !== Number(id));
+        e.target.parentNode.parentNode.parentNode.remove();
+        articles = articles.filter(i => i.date !== date)
     }
         }
     if(e.target.id === "edit-button"){
         
-        let id = e.target.value;
-        let title = articles[id].titre;
-        let image = articles[id].image;
-        let article = articles[id].article;
+        let date = e.target.value;
+        let title = e.target.parentNode.parentNode.parentNode.childNodes[5].innerHTML;
+        imageURL = e.target.parentNode.parentNode.parentNode.childNodes[3].childNodes[0].src;
+        let article = "";
 
-        editID.innerHTML = id;
-        editPreviewImg.firstChild.src = image;
-        editTitle.value = title;
-        editArticle.value = article;
+        db.collection("articles").doc(date).get()
+        .then((response) => {
+            article = response.data().article
+            editID.innerHTML = date;
+            editPreviewImg.firstChild.src = imageURL;
+            editTitle.value = title;
+            editArticle.value = article
         
-        blogPage.classList.remove("blog-class");
-        editArticlePage.classList.add("edit-article-class");
+            blogPage.classList.remove("blog-class");
+            editArticlePage.classList.add("edit-article-class");
+        })
+
+        
     }
 })
 
@@ -121,20 +129,13 @@ editArticlePage.addEventListener("click", (e) => {
 })
 
 editArticleBtn.addEventListener("click", () => {
-    let id = editID.innerHTML;
+    let date = editID.innerHTML;
     let image = imgURL;
     let title = editTitle.value;
     let article = editArticle.value;
 
-    articles[id] = {
-        ID: Number(id),
-        image: image,
-        titre: title,
-        article: article
-    }
-
-    db.collection("articles").doc(`${id}`).set({
-        ID: Number(id),
+    db.collection("articles").doc(`${date}`).set({
+        date: date,
         image: image,
         titre: title,
         article: article
@@ -146,9 +147,8 @@ editArticleBtn.addEventListener("click", () => {
         alert("Erreur lors de la modification de l'article: ", error);
     });
 
-    let html = showArticles(articles);
     articleList.innerHTML = "";
-    articleList.innerHTML += html;
+    getArticleFromFirestore()
 
     blogPage.classList.add("blog-class");
     datesPage.classList.remove("dates-class");
@@ -211,7 +211,8 @@ editArticleImg.addEventListener("change", () => {
 //----------------FUNCTIONS----------------------------------------------------
 
 function getArticleFromFirestore(){
-    docRef = db.collection("articles").orderBy("ID", "asc");
+    articles = [];
+    docRef = db.collection("articles");
     docRef.get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             let data = doc.data();
@@ -225,34 +226,23 @@ function getArticleFromFirestore(){
 function showArticles(articles){
    return articles.map(i => {
         return `
-        <tr>
-                            <td>${i.ID}</td>
-                            <td><img src="${i.image}" alt="image" width="200px"></td>
-                            <td>${i.titre}</td>
-                            <td>${i.article}</td>
-                            <td><button value="${i.ID}" id="edit-button" class="button btn-outline-info p-1 m-1">Edit</button><button value="${i.ID}" id="delete-button" class="button btn-outline-danger p-1">Delete</button></td>
+        <tr style="height: 100px; overflow: hidden;">
+                            <td width="100px">${i.date}</td>
+                            <td width="210px"><img src="${i.image}" alt="image" width="200px"></td>
+                            <td width="735px">${i.titre}</td>
+                            <td><div class="d-flex flex-column mt-3" style="margin-right: 4px"><button value="${i.date}" id="edit-button" class="button btn-success p-1 m-auto mb-2" style="width: 74px;">EDIT</button><button value="${i.date}" id="delete-button" class="button btn-danger p-1 m-auto" style="width: 74px;">DELETE</button></div></td>
                         </tr>
         `;
     }).join("");
 };
 
 function addNewArticle(){
-    let id = 0;
-    for(let i = 0; i < articles.length; i++){
-        if(articles[i].ID !== i){
-            id = i.toString();
-            break;
-        }
-        if((i+1) === articles.length){
-            id = (i+1).toString();
-        }
-    }
     
     let title = articleTitle.value;
     let article = articleArticle.value;
 
-    db.collection("articles").doc(id || "0").set({
-        ID: Number(id),
+    db.collection("articles").doc(todayDate).set({
+        date: todayDate,
         image: imgURL,
         titre: title,
         article: article
@@ -267,26 +257,12 @@ function addNewArticle(){
     articleTitle.value = "";
     articleArticle.value = "";
 
-    articles[articles.length] = {
-        ID: Number(id),
-        image: imgURL,
-        titre: title,
-        article: article
-    }
-
-    articles.sort(sortNum);
-
-    let html = showArticles(articles);
     articleList.innerHTML = "";
-    articleList.innerHTML += html;
+    getArticleFromFirestore();
 
     blogPage.classList.add("blog-class");
     datesPage.classList.remove("dates-class");
     addArticlePage.classList.remove("add-article");
-}
-
-function sortNum(a, b){
-    return a.ID - b.ID;
 }
 
 function identifyUser(){
@@ -302,7 +278,7 @@ function identifyUser(){
 
         userImg.src = image
         userWelcome.innerHTML = `
-        <h1  class="mb-2" style="font-size: 1.8rem;">Bienvenue ${name} !</h1>
+        <h1 class="mb-2" style="font-size: 1.8rem;">Bienvenue ${name} !</h1>
         <span class="mb-2" style="text-align: center; font-size: 1.5rem;">${role}</span>
         `
         });

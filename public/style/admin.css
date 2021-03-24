@@ -21,6 +21,10 @@ main{
     background-color: rgb(241, 235, 235);
 }
 
+h2{
+    text-align: center;
+}
+
 #links .no-bg{
     width: 30%;
     font-size: 1.5rem;
@@ -40,13 +44,31 @@ main{
     display: block;
 }
 
-
 .add-article, .add-date, .edit-article-class, .edit-date-class{
     display: flex;
 }
 
 main button{
     border-radius: 5px;
+}
+
+#edit-button, #delete-button{
+    border: none;
+    -webkit-box-shadow: 2px 10px 9px -4px rgba(74,74,74,0.66);
+-moz-box-shadow: 2px 10px 9px -4px rgba(74,74,74,0.66);
+box-shadow: 2px 10px 9px -4px rgba(74,74,74,0.66);
+}
+
+#edit-button:hover{
+    border: 2px solid rgb(50, 160, 50) !important;
+    background-color: rgb(241, 235, 235);
+    color: rgb(50, 160, 50);
+}
+
+#delete-button:hover{
+    border: 2px solid rgb(173, 66, 66) !important;
+    background-color: rgb(241, 235, 235);
+    color: rgb(173, 66, 66);
 }
 
 .btn-outline-info:hover{
