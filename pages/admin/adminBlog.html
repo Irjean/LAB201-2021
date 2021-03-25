@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link href="../modules/font-awesome/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="../style/admin.css" rel="stylesheet" type="text/css">
+    <link href="../../style/admin.css" rel="stylesheet" type="text/css">
     <title>Admin Page</title>
 </head>
 <body class="d-flex">
@@ -43,44 +43,11 @@
                 </table>
             </div> 
         </section>
-        <section id="add-article-page" class="hidden flex-column w-50 m-auto mt-5">
-            <h2>Créer un article</h2>
-            <button id="back-button-article" class="button btn-primary" style="width: 10%;">Retour</button>
-            <hr>
-            <h3 class="mb-2">Date</h3>
-            <span id="article-date" class="mb-2"></span>
-            <h3 class="mb-2">Titre</h3>
-            <input id="article-title" class="w-50 mb-2" type="text">
-            <h3 class="mb-2">Image</h3>
-            <div id="preview-img" style="height: 200px;"></div>
-            <input id="article-image" class="w-50 mb-2" type="file">
-           
-            <h3 class="mb-2">Article</h3> 
-            <div><button id="gras">Gras</button><button>Italics</button></div>
-            <textarea id="article-article" style="height: 300px; text-align: start; margin-bottom: 10px; text-align: center;"></textarea>
-            <div><a href="#"><button id="add-article-btn" class="button btn-primary w-25">Créer</button></a><button id="add-article-preview">Prévisualiser</button></div>
-        </section>
-        <section id="edit-article-page" class="hidden flex-column w-50 m-auto mt-5">
-            <h2>Modifier un article</h2>
-            <button id="back-button-article" class="button btn-primary" style="width: 10%;">Retour</button>
-            <hr>
-            <h3>Date</h3>
-            <span id="edit-ID"></span>
-            <h3 class="mb-2">Titre</h3>
-            <input id="edit-article-title" class="w-50 mb-2" type="text" autocomplete="off">
-            <h3 class="mb-2">Image</h3>
-            <div id="edit-preview-image" style="height: 200px;"><img height="200px" src="" alt="image"></div>
-            <input id="edit-article-image" class="w-50 mb-2" type="file">
-            <h3 class="mb-2">Article</h3>
-            <div><button>Gras</button><button>Italics</button></div>
-            <textarea id="edit-article-article" style="height: 300px; text-align: start; margin-bottom: 10px; text-align: center;" type="text" autocomplete="off"></textarea>
-            <a href="#"><button id="edit-article-btn" class="button btn-primary w-25">Modifier</button></a>
-        </section>
         <section id="dates" class="hidden w-50 m-auto mt-5" style="margin-left: 200px;">
             <div>
                 <div class="d-flex flex-column w-75 m-auto mt-5">
                     <h2>Gérer les dates</h2>
-                    <button id="add-date-button-page" class="button btn-primary" style="width: 10%; margin-left: 82.2%">Add</button>
+                    <button id="add-date-button-page" onclick='{window.location.href = "./createDate.html"}' class="button btn-primary" style="width: 10%; margin-left: 82.2%">Add</button>
                     <hr style="color: black;">
                     <table class="table m-auto">
                         <thead>
@@ -95,30 +62,11 @@
                 </div> 
             </div>
         </section>
-        <section id="add-date-page" class="hidden flex-column w-50 m-auto mt-5" style="margin-left: 200px;">
-            <h2>Ajouer une date</h2>
-            <button id="back-button-date" onclick="backDateButton()" class="button btn-primary" style="width: 10%;">Retour</button>
-            <hr>
-            <h3 class="mb-2">Date</h3>
-            <input id="date-date" class="w-25 mb-5" type="date">
-            <h3 class="mb-2">Lieu</h3>
-            <input id="date-place" class="w-25 mb-2" type="text">
-            <a href="#"><button id="add-date-btn" onclick="addNewDate()" class="button btn-primary w-25">Ajouter</button></a>
-        </section>
-        <section id="edit-date-page" class="hidden flex-column w-50 m-auto mt-5">
-            <h2>Modifier une date</h2>
-            <button id="back-button-date" onclick="backDateButton()" class="button btn-primary" style="width: 10%;">Retour</button>
-            <hr>
-            <h3 class="mb-2">Date</h3>
-            <span id="edit-date" class="w-25 mb-2"></span>
-            <h3 class="mb-2">Lieu</h3>
-            <input id="edit-date-place" class="w-25 mb-3" type="text">
-            <a href="#"><button id="edit-date-btn" class="button btn-primary w-25">Modifier</button></a>
-        </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     <script src="../modules/font-awesome/js/all.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.tiny.cloud/1/1j0uekil036c8dfmyu98jyswqvunb8n077ylt5k65rh20r3n/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>tinymce.init({selector:'textarea'});</script>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-auth.js"></script>
@@ -142,7 +90,78 @@
         var db = firebase.firestore();
         var storage = firebase.storage();
     </script>
-    <script src="../js/blog.js"></script>
-    <script src="../js/dates.js"></script>
+    <script src="../../js/admin/blog.js"></script>
+    <script src="../../js/admin/dates.js"></script>
+    <script>
+        setTimeout(getArticleFromFirestore(), "5000")
+            
+        currLocation = window.location;
+
+        const blogPage = document.querySelector("#blog");
+        const datesPage = document.querySelector("#dates");
+        const articleList = document.querySelector("#article-list");
+        const dateList = document.querySelector("#date-list");
+
+        blogPage.addEventListener("click", (e)=>{
+    let date = e.target.value;
+    if(e.target.id === "delete-button"){
+        if(confirm("Voulez-vous vraiment supprimer l'article ?")){
+          db.collection("articles").doc(date).delete()
+        .then(() => {
+            alert("Article supprimé !");
+        }).catch((error) => {
+            alert("L'article n'a pas pu être supprimé : ", error);
+        }); 
+        e.target.parentNode.parentNode.parentNode.remove();
+        articles = articles.filter(i => i.date !== date)
+    }
+        }
+    if(e.target.id === "edit-button"){
+        
+        let date = e.target.value;
+        let title = e.target.parentNode.parentNode.parentNode.childNodes[5].innerHTML;
+        imageURL = e.target.parentNode.parentNode.parentNode.childNodes[3].childNodes[0].src;
+        let article = "";
+
+        db.collection("articles").doc(date).get()
+        .then((response) => {
+            article = response.data().article
+            localStorage.setItem("date", date);
+            localStorage.setItem("img", imageURL);
+            localStorage.setItem("title", title);
+        
+            window.location.href = "./editBlog"
+        })
+
+        
+    }
+})
+
+function getArticleFromFirestore(){
+    articles = [];
+    docRef = db.collection("articles");
+    docRef.get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            let data = doc.data();
+            articles.push(data);
+        });
+        let html = showArticles(articles)
+        articleList.innerHTML += html;
+    });
+}
+    
+function showArticles(articles){
+   return articles.map(i => {
+        return `
+        <tr style="height: 100px; overflow: hidden;">
+                            <td width="100px">${i.date}</td>
+                            <td width="210px"><img src="${i.image}" alt="image" width="200px"></td>
+                            <td width="735px">${i.titre}</td>
+                            <td><div class="d-flex flex-column mt-3" style="margin-right: 4px"><button value="${i.date}" id="edit-button" class="button btn-success p-1 m-auto mb-2" style="width: 74px;">EDIT</button><button value="${i.date}" id="delete-button" class="button btn-danger p-1 m-auto" style="width: 74px;">DELETE</button></div></td>
+                        </tr>
+        `;
+    }).join("");
+};
+    </script>
 </body>
 </html>
