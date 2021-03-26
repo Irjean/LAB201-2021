@@ -74,8 +74,8 @@
         const editPlace = document.querySelector("#edit-date-place");
         const editDateForm = document.querySelector("#edit-date-form");
 
-        localStorage.getItem("date", date);
-        localStorage.getItem("place", place);
+        let date = localStorage.getItem("date", date);
+        let place = localStorage.getItem("place", place);
 
         editDate.innerHTML = date;
         editPlace.value = place;

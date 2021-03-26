@@ -47,7 +47,12 @@
             <div>
                 <div class="d-flex flex-column w-75 m-auto mt-5">
                     <h2>Gérer les dates</h2>
-                    <button id="add-date-button-page" onclick='{window.location.href = "./createDate.html"}' class="button btn-primary" style="width: 10%; margin-left: 82.2%">Add</button>
+                    <button id="add-date-button-page" onclick='{
+                        window.location.href = "./createDate.html";
+                        localStorage.setItem("title", "");
+                        localStorage.setItem("img", "");
+                        localStorage.setItem("article", "");
+                        }' class="button btn-primary" style="width: 10%; margin-left: 82.2%">Add</button>
                     <hr style="color: black;">
                     <table class="table m-auto">
                         <thead>
