@@ -9,7 +9,7 @@ loginBtn.addEventListener("click", (e) => {
     // Signed in
     console.log("successfully logged in !");
     var user = userCredential.user;
-    window.location.href = "../pages/admin.html"
+    window.location.href = "../pages/admin/adminBlog.html"
     
   })
   .catch((error) => {
