@@ -21,7 +21,7 @@
         <section id="links" class="d-flex flex-column align-items-start" style="height: 25%; margin-top: 72%">
            <button class="text-white mx-auto mb-3 no-bg" style="text-align: start;" id="blog-button"><i class="fas fa-caret-right mr-1"></i> Blog</button>
             <button class="text-white mx-auto no-bg" style="text-align: start;" id="dates-button"><i class="fas fa-caret-right"></i> Dates</button>
-            <button id="logout-btn" onclick="logout()" class="text-white btn btn-danger" style="width: 10%; position: fixed; bottom: 5%; left: 1.8%;">Se déconnecter</button>
+            <button id="logout-btn" onclick="logout()" class="text-white btn btn-danger" style="width: 10%; position: fixed; bottom: 5%; left: 5%;">Se déconnecter</button>
         </section>
     </aside>
     <main>
@@ -72,13 +72,13 @@
         const editDatePage = document.querySelector("#edit-date-page");
         const editDate = document.querySelector("#edit-date");
         const editPlace = document.querySelector("#edit-date-place");
-
-
         const editDateForm = document.querySelector("#edit-date-form");
 
         localStorage.getItem("date", date);
-        localStorage.getItem("img", imageURL);
-        localStorage.getItem("title", title);
+        localStorage.getItem("place", place);
+
+        editDate.innerHTML = date;
+        editPlace.value = place;
 
         editDateForm.addEventListener("submit", (e) => {e.preventDefault()});
 

@@ -13,12 +13,10 @@ window.onload = () => {
 
 const blogBtn = document.querySelector("#blog-button");
 const datesBtn = document.querySelector("#dates-button");
-const addArticleBtnPage = document.querySelector("#add-article-button-page");
-const addArticlePage = document.querySelector("#add-article-page");
 const userImg = document.querySelector("#user-image");
 const userWelcome = document.querySelector("#user-welcome");
 
-let currLocation = "";
+let currLocation = window.location.toString().split("/");
 let user = {};
 let articles = [];
 let imgURL = "";
@@ -27,17 +25,18 @@ let imgURL = "";
 
 blogBtn.addEventListener("click", (e) => {
     e.preventDefault();
-
-    if(window.location != currLocation){
-        console.log('ça passe');
-    //    window.location.href = "./adminBlog.html"
+    if(currLocation[currLocation.length-1] != "adminBlog.html"){
+        window.location.href = "./adminBlog.html"
     }
     
 })
 
 datesBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    window.location.href = "./adminDate.html"
+    if(currLocation[currLocation.length-1] != "adminDate.html"){
+      window.location.href = "./adminDate.html"
+    }
+    
 })
 
 //----------------FUNCTIONS----------------------------------------------------
