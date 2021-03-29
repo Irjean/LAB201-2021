@@ -82,13 +82,21 @@
         const editArticlePage = document.querySelector("#edit-article-page");
         const editArticleForm = document.querySelector("#edit-article-form");
 
+        let dateNum = localStorage.getItem("dateNum");
         let date = localStorage.getItem("date");
         imgURL = localStorage.getItem("img");
         let title = localStorage.getItem("title");
+        let article = localStorage.getItem("article");
 
         editID.innerHTML = date;
         editPreviewImg.childNodes[0].src = imgURL;
         editTitle.value = title;
+
+        window.setTimeout(getTextareaArticle, "1000");
+        
+        function getTextareaArticle(){
+            tinymce.get("edit-article-article").setContent(article);
+        }
 
         editArticleForm.addEventListener("submit", (e) => {e.preventDefault()});
 
@@ -113,7 +121,7 @@
         alert("Erreur lors de la modification de l'article: ", error);
     });
 
-    window.location.href = "./admin.html";
+    window.location.href = "./adminBlog.html";
 })
 
 editArticleImg.addEventListener("change", () => {

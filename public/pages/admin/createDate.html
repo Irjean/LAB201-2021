@@ -74,6 +74,8 @@
         const addDateBtn = document.querySelector("#add-date-btn");
         const dateForm = document.querySelector("#date-form");
 
+        dateDate.setAttribute("min", todayDate);
+
         dateForm.addEventListener("submit", (e) => {e.preventDefault()});
 
         function addNewDate(){

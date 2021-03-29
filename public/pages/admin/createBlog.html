@@ -26,7 +26,7 @@
     </aside>
     <main>
         <section id="add-article-page" class="flex-column w-50 m-auto mt-5">
-        <form id="article-form">
+        <form id="article-form" method="POST">
         <h2>Créer un article</h2>
         <button id="back-button-article" class="button btn-primary" onclick="window.location.href = './adminBlog.html'" style="width: 10%;">Retour</button>
         <hr>
@@ -40,7 +40,7 @@
        
         <h3 class="mb-2">Article</h3> 
         <textarea id="article-article" style="height: 300px; text-align: start; margin-bottom: 10px; text-align: center;"></textarea>
-        <div><a href="#"><button id="add-article-btn" class="button btn-primary w-25">Créer</button></a><button id="add-article-preview">Prévisualiser</button></div>
+        <div class="mt-2"><a href="#"><button id="add-article-btn" class="button btn-primary w-25">Créer</button></a><button id="add-article-preview">Prévisualiser</button></div>
         </form>
         </section>
     </main>
@@ -83,26 +83,38 @@
     const addPreview = document.querySelector("#add-article-preview");
     const articleForm = document.querySelector("#article-form");
 
+    articleForm.addEventListener("submit", (e)=>{e.preventDefault();})
+
+    let title = localStorage.getItem("title");
+    imgURL = localStorage.getItem("img");
+    let article = localStorage.getItem("article");
+
+    articleTitle.value = title;
+    
+    addArticlePreviewImg.innerHTML = `<img height="200px" src="${imgURL}" alt="previewImage">`
+
     articleDate.innerHTML = todayDate
 
-        addArticleBtn.addEventListener("click", addNewArticle);
+    addArticleBtn.addEventListener("click", addNewArticle);
 
-        articleForm.addEventListener("submit", (e) => {e.preventDefault()})
 
-        addPreview.addEventListener("click", () => {
+    addPreview.addEventListener("click", (e) => {
+        e.preventDefault();
     let title = articleTitle.value;
-    let article = articleArticle.value;
+    let article = tinyMCE.activeEditor.getContent();
 
-    localStorage.setItem("img", imgURL);
     localStorage.setItem("title", title);
+    localStorage.setItem("img", imgURL);
     localStorage.setItem("article", article);
-    window.location = "./article.html"
+
+    window.location.href = "./articlePreview.html"
+
 })
     
-        articleImg.addEventListener("change", () => {
+    articleImg.addEventListener("change", () => {
     addArticlePreviewImg.innerHTML = '<i class="fas fa-spinner spin"></i>'
     let image = articleImg.files[0];
-    let imgPath = `images/${image.name}`;
+    imgPath = `images/${image.name}`;
     let imageStorage = firebase.storage().ref(imgPath);
     let uploadImg = imageStorage.put(image);
     uploadImg.on("state_changed", 
@@ -118,19 +130,19 @@
         imageStorage.getDownloadURL()
     .then((url) => {
         imgURL = url;
-        addArticlePreviewImg.innerHTML = `<img height="200px" src="${imgURL}" alt="minecraft">`
+        addArticlePreviewImg.innerHTML = `<img height="200px" src="${imgURL}" alt="previewImage">`
     })
     })
 })
     
-        function addNewArticle(){
+    function addNewArticle(){
     
     let title = articleTitle.value;
-    let article = articleArticle.value;
-    console.log(article);
-    return;
+    let article = tinyMCE.activeEditor.getContent();
+    let dateNum = today.getTime();
 
-    db.collection("articles").doc(todayDate).set({
+    db.collection("articles").doc(dateNum.toString()).set({
+        dateNum: dateNum,
         date: todayDate,
         image: imgURL,
         titre: title,
@@ -138,22 +150,17 @@
     })
     .then(() => {
         alert("Article créé avec succés !");
+        window.location.href = "./adminBlog.html"
     })
     .catch((error) => {
         alert("Erreur lors de la création de l'article: ", error);
     });
 
-    articleTitle.value = "";
-    articleArticle.value = "";
-
-    articleList.innerHTML = "";
-    getArticleFromFirestore();
-
-    blogPage.classList.add("blog-class");
-    datesPage.classList.remove("dates-class");
-    addArticlePage.classList.remove("add-article");
-}
     
+
+    
+}
+
 </script>
 </body>
 </html>

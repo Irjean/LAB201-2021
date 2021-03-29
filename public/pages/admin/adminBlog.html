@@ -47,7 +47,12 @@
             <div>
                 <div class="d-flex flex-column w-75 m-auto mt-5">
                     <h2>Gérer les dates</h2>
-                    <button id="add-date-button-page" onclick='{window.location.href = "./createDate.html"}' class="button btn-primary" style="width: 10%; margin-left: 82.2%">Add</button>
+                    <button id="add-date-button-page" onclick='{
+                        window.location.href = "./createDate.html";
+                        localStorage.setItem("title", "");
+                        localStorage.setItem("img", "");
+                        localStorage.setItem("article", "");
+                        }' class="button btn-primary" style="width: 10%; margin-left: 82.2%">Add</button>
                     <hr style="color: black;">
                     <table class="table m-auto">
                         <thead>
@@ -93,51 +98,61 @@
     <script src="../../js/admin/blog.js"></script>
     <script src="../../js/admin/dates.js"></script>
     <script>
-        setTimeout(getArticleFromFirestore(), "5000")
+    setTimeout(getArticleFromFirestore(), "5000")
 
-        const blogPage = document.querySelector("#blog");
-        const datesPage = document.querySelector("#dates");
-        const articleList = document.querySelector("#article-list");
-        const dateList = document.querySelector("#date-list");
+    const blogPage = document.querySelector("#blog");
+    const datesPage = document.querySelector("#dates");
+    const articleList = document.querySelector("#article-list");
+    const dateList = document.querySelector("#date-list");
 
-        blogPage.addEventListener("click", (e)=>{
+    localStorage.setItem("title", "");
+    localStorage.setItem("img", "");
+    localStorage.setItem("article", "");
+
+    blogPage.addEventListener("click", (e)=>{
+let date = e.target.value;
+if(e.target.id === "delete-button"){
+    if(confirm("Voulez-vous vraiment supprimer l'article ?")){
+        db.collection("articles").doc(date).delete()
+    .then(() => {
+        alert("Article supprimé !");
+    }).catch((error) => {
+        alert("L'article n'a pas pu être supprimé : ", error);
+    }); 
+    e.target.parentNode.parentNode.parentNode.remove();
+    articles = articles.filter(i => i.date !== date)
+}
+    }
+if(e.target.id === "edit-button"){
+    
     let date = e.target.value;
-    if(e.target.id === "delete-button"){
-        if(confirm("Voulez-vous vraiment supprimer l'article ?")){
-          db.collection("articles").doc(date).delete()
-        .then(() => {
-            alert("Article supprimé !");
-        }).catch((error) => {
-            alert("L'article n'a pas pu être supprimé : ", error);
-        }); 
-        e.target.parentNode.parentNode.parentNode.remove();
-        articles = articles.filter(i => i.date !== date)
-    }
-        }
-    if(e.target.id === "edit-button"){
-        
-        let date = e.target.value;
-        let title = e.target.parentNode.parentNode.parentNode.childNodes[5].innerHTML;
-        imageURL = e.target.parentNode.parentNode.parentNode.childNodes[3].childNodes[0].src;
-        let article = "";
+    let title = e.target.parentNode.parentNode.parentNode.childNodes[5].innerHTML;
+    imageURL = e.target.parentNode.parentNode.parentNode.childNodes[3].childNodes[0].src;
+    let article = "";
 
-        db.collection("articles").doc(date).get()
-        .then((response) => {
-            article = response.data().article
-            localStorage.setItem("date", date);
-            localStorage.setItem("img", imageURL);
-            localStorage.setItem("title", title);
+    db.collection("articles").doc(date).get()
+    .then((response) => {
+        article = response.data().article;
+        date = response.data().date;
+        dateNum = response.data().dateNum;
         
-            window.location.href = "./editBlog.html"
-        })
+        localStorage.setItem("dateNum", dateNum);
+        localStorage.setItem("date", date);
+        localStorage.setItem("img", imageURL);
+        localStorage.setItem("title", title);
+        localStorage.setItem("article", article);
+    
+        window.location.href = "./editBlog.html"
+    })
 
-        
-    }
+    
+}
 })
 
-function getArticleFromFirestore(){
+    function getArticleFromFirestore(){
     articles = [];
-    docRef = db.collection("articles");
+    docRef = db.collection("articles").orderBy("dateNum", "desc");
+;
     docRef.get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             let data = doc.data();
@@ -148,14 +163,14 @@ function getArticleFromFirestore(){
     });
 }
     
-function showArticles(articles){
+    function showArticles(articles){
    return articles.map(i => {
         return `
         <tr style="height: 100px; overflow: hidden;">
                             <td width="100px">${i.date}</td>
                             <td width="210px"><img src="${i.image}" alt="image" width="200px"></td>
                             <td width="735px">${i.titre}</td>
-                            <td><div class="d-flex flex-column mt-3" style="margin-right: 4px"><button value="${i.date}" id="edit-button" class="button btn-success p-1 m-auto mb-2" style="width: 74px;">EDIT</button><button value="${i.date}" id="delete-button" class="button btn-danger p-1 m-auto" style="width: 74px;">DELETE</button></div></td>
+                            <td><div class="d-flex flex-column mt-3" style="margin-right: 4px"><button value="${i.dateNum.toString()}" id="edit-button" class="button btn-success p-1 m-auto mb-2" style="width: 74px;">EDIT</button><button value="${i.dateNum.toString()}" id="delete-button" class="button btn-danger p-1 m-auto" style="width: 74px;">DELETE</button></div></td>
                         </tr>
         `;
     }).join("");

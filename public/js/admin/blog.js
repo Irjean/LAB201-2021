@@ -64,7 +64,7 @@ function identifyUser(){
 
 function logout(){
     firebase.auth().signOut().then(() => {
-        window.location.href = "./login.html"
+        window.location.href = "../login.html"
       }).catch((error) => {
         // An error happened.
       });
