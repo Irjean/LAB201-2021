@@ -83,13 +83,14 @@
     const addPreview = document.querySelector("#add-article-preview");
     const articleForm = document.querySelector("#article-form");
 
+    articleForm.addEventListener("submit", (e)=>{e.preventDefault();})
 
     let title = localStorage.getItem("title");
     imgURL = localStorage.getItem("img");
     let article = localStorage.getItem("article");
 
     articleTitle.value = title;
-    setTimeout(tinymce.activeEditor.setContent(article), "5000");
+    
     addArticlePreviewImg.innerHTML = `<img height="200px" src="${imgURL}" alt="previewImage">`
 
     articleDate.innerHTML = todayDate
@@ -138,8 +139,10 @@
     
     let title = articleTitle.value;
     let article = tinyMCE.activeEditor.getContent();
+    let dateNum = today.getTime();
 
-    db.collection("articles").doc(todayDate).set({
+    db.collection("articles").doc(dateNum.toString()).set({
+        dateNum: dateNum,
         date: todayDate,
         image: imgURL,
         titre: title,
@@ -147,6 +150,7 @@
     })
     .then(() => {
         alert("Article créé avec succés !");
+        window.location.href = "./adminBlog.html"
     })
     .catch((error) => {
         alert("Erreur lors de la création de l'article: ", error);
@@ -154,7 +158,7 @@
 
     
 
-    window.location.href = "./adminBlog.html"
+    
 }
 
 </script>
