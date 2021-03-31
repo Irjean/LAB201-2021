@@ -40,7 +40,7 @@
        
         <h3 class="mb-2">Article</h3> 
         <textarea id="article-article" style="height: 300px; text-align: start; margin-bottom: 10px; text-align: center;"></textarea>
-        <div class="mt-2"><a href="#"><button id="add-article-btn" class="button btn-primary w-25">Créer</button></a><button id="add-article-preview">Prévisualiser</button></div>
+        <div class="mt-2"><button id="add-article-btn" class="btn-primary" style="width: 10%; height: 30px;">Créer</button><button id="add-article-preview" class="btn-outline-primary" style="margin-left: 5px; height: 30px; width: 15%">Prévisualiser</button></div>
         </form>
         </section>
     </main>
@@ -99,7 +99,6 @@
 
 
     addPreview.addEventListener("click", (e) => {
-        e.preventDefault();
     let title = articleTitle.value;
     let article = tinyMCE.activeEditor.getContent();
 
@@ -107,8 +106,7 @@
     localStorage.setItem("img", imgURL);
     localStorage.setItem("article", article);
 
-    window.location.href = "./articlePreview.html"
-
+    window.open("./articlePreview.html", "_blank")
 })
     
     articleImg.addEventListener("change", () => {

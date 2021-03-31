@@ -25,16 +25,35 @@
         </section>
     </aside>
     <main class="h-100">
-        <section id="dates" class="w-50 m-auto mt-5" style="margin-left: 200px;">
+        <div class="modal" tabindex="-1" id="deleteModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Attention !</h5>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Voulez-vous vraiment supprimer cette date ?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="{$('#deleteModal').modal('hide')}">Fermer</button>
+                  <button type="button" class="btn btn-danger" onclick="deleteDate()">SUPPRIMER</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <section id="dates" class="w-75 m-auto mt-5" style="margin-left: 200px;">
             <div>
                 <div class="d-flex flex-column w-75 m-auto mt-5">
                     <h2>Gérer les dates</h2>
-                    <button id="add-date-button-page" onclick='{window.location.href = "./createDate.html"}' class="button btn-primary" style="width: 10%; margin-left: 82.2%">Add</button>
+                    <button id="add-date-button-page" onclick='{window.location.href = "./createDate.html"}' class="button btn-primary" style="width: 15%; margin-left: 82.2%">AJOUTER</button>
                     <hr style="color: black;">
                     <table class="table m-auto">
                         <thead>
                           <th>Date</th>
-                          <th>Lieu</th>
+                          <th>Ville</th>
+                          <th>Pays</th>
+                          <th>Lieux</th>
                           <th></th>
                         </thead>
                         <tbody id="date-list">
@@ -45,6 +64,7 @@
             </div>
         </section>
     </main>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     <script src="../../modules/font-awesome/js/all.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/1j0uekil036c8dfmyu98jyswqvunb8n077ylt5k65rh20r3n/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
@@ -82,28 +102,35 @@
         const dateList = document.querySelector("#date-list");
 
         let dates = [];
+        let date;
+        let tdToDelete;
 
 
-        datesPage.addEventListener("click", (e)=>{
-    let date = e.target.value;
+datesPage.addEventListener("click", (e)=>{
+        date = e.target.value;
+        
     if(e.target.id === "delete-button"){
-        if(confirm("Voulez-vous vraiment supprimer cette date ?")){
-            deleteDate(date);
-        e.target.parentNode.parentNode.parentNode.remove();
-        dates = dates.filter(i => i.date !== date);
-        }
-     }
+        tdToDelete = e.target.parentNode.parentNode.parentNode;
+        $('#deleteModal').modal('show');
+    }
      if(e.target.id === "edit-button"){
         
-        let date = e.target.value.split(" ")[0];
-        let getPlace = e.target.value.split(" ");
-        getPlace.shift();
-        let place = getPlace.join(" ");
+        date = e.target.value;;
+        db.collection("dates").doc(date).get()
+        .then((response) => {
+        let city = response.data().city;
+        let country = response.data().country;
+        let place = response.data().place;
 
         localStorage.setItem("date", date);
         localStorage.setItem("place", place);
+        localStorage.setItem("city", city);
+        localStorage.setItem("country", country);
 
-        window.location.href = "./editDate.html";
+        window.location.href = "./editDate.html";  
+        })
+
+        
     }
 })
     
@@ -121,19 +148,25 @@ function getDatesFromFirestore(){
 
 function showDates(dates){
     return dates.map(i => {
+        let newDate = i.date.split("-").reverse().join("-");
          return `
          <tr>
-                             <td>${i.date}</td>
+                             <td>${newDate}</td>
+                             <td>${i.city}</td>
+                             <td>${i.country}</td>
                              <td>${i.place}</td>
-                             <td><div class="d-flex flex-column" style="margin-right: 4px"><button value="${i.date} ${i.place}" id="edit-button" class="button btn-success p-1 m-auto mb-2" style="width: 74px;"">Edit</button><button value="${i.date}" id="delete-button" class="button btn-danger p-1 m-auto" style="width: 74px;">Delete</button></div></td>
+                             <td><div class="d-flex flex-column" style="margin-right: 4px"><button value="${i.date}" id="edit-button" class="button btn-success p-1 m-auto mb-2" style="width: 74px;"">EDITER</button><button value="${i.date}" id="delete-button" class="button btn-danger p-1 m-auto" style="width: 110px;">SUPPRIMER</button></div></td>
                          </tr>
          `;
      }).join("");
 }
 
-function deleteDate(date){
+function deleteDate(){
+    $('#deleteModal').modal('hide');
     db.collection("dates").doc(date).delete()
     .then(() => {
+        dates = dates.filter(i => i.date !== date);
+        tdToDelete.remove();
         alert("Article supprimé !");
     }).catch((error) => {
         console.error("Erreur lors de la suppression: ", error);

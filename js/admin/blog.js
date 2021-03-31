@@ -4,7 +4,7 @@ window.onload = () => {
           // User is signed in.
           identifyUser()
         } else {
-          window.location.href = "./login.html"
+          window.location.href = "../login.html"
         }
       });
 };

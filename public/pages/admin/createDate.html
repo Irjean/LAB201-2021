@@ -26,13 +26,17 @@
     </aside>
     <main>
         <section id="add-date-page" class="flex-column w-50 m-auto mt-5" style="margin-left: 200px;">
-            <form id="date-form">
+            <form id="date-form" class="d-flex flex-column">
             <h2>Ajouer une date</h2>
             <button id="back-button-date" onclick="window.location.href = './adminDate.html'" class="button btn-primary" style="width: 10%;">Retour</button>
             <hr>
             <h3 class="mb-2">Date</h3>
-            <input id="date-date" class="w-25 mb-5" type="date">
-            <h3 class="mb-2">Lieu</h3>
+            <input id="date-date" class="w-25 mb-2" type="date">
+            <h3 class="mb-2">Ville</h3>
+            <input id="date-city" class="w-25 mb-2" type="text">
+            <h3 class="mb-2">Pays</h3>
+            <input id="date-country" class="w-25 mb-2" type="text">
+            <h3 class="mb-2">Lieux</h3>
             <input id="date-place" class="w-25 mb-2" type="text">
             <a href="#"><button id="add-date-btn" onclick="addNewDate()" class="button btn-primary w-25">Ajouter</button></a>
             </form>
@@ -70,6 +74,8 @@
     <script>
 
         const dateDate = document.querySelector("#date-date");
+        const dateCity = document.querySelector("#date-city");
+        const dateCountry = document.querySelector("#date-country");
         const datePlace = document.querySelector("#date-place");
         const addDateBtn = document.querySelector("#add-date-btn");
         const dateForm = document.querySelector("#date-form");
@@ -81,10 +87,14 @@
         function addNewDate(){
 
 let dateValue = dateDate.value;
+let city = dateCity.value;
+let country = dateCountry.value;
 let place = datePlace.value;
 
 db.collection("dates").doc(`${dateValue}`).set({
     date: dateValue,
+    city: city,
+    country: country,
     place: place
 })
 .then(() => {

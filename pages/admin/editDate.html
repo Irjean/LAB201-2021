@@ -32,7 +32,11 @@
             <hr>
             <h3 class="mb-2">Date</h3>
             <span id="edit-date" class="w-25 mb-2"></span>
-            <h3 class="mb-2">Lieu</h3>
+            <h3 class="mb-2">Ville</h3>
+            <input id="edit-date-city" class="w-25 mb-3" type="text">
+            <h3 class="mb-2">Pays</h3>
+            <input id="edit-date-country" class="w-25 mb-3" type="text">
+            <h3 class="mb-2">Lieux</h3>
             <input id="edit-date-place" class="w-25 mb-3" type="text">
             <button id="edit-date-btn" class="button btn-primary w-25">Modifier</button>
         </form>
@@ -71,24 +75,34 @@
         const editDateBtn = document.querySelector("#edit-date-btn");
         const editDatePage = document.querySelector("#edit-date-page");
         const editDate = document.querySelector("#edit-date");
+        const editCity = document.querySelector("#edit-date-city")
+        const editCountry = document.querySelector("#edit-date-country");
         const editPlace = document.querySelector("#edit-date-place");
         const editDateForm = document.querySelector("#edit-date-form");
 
         let date = localStorage.getItem("date");
         let place = localStorage.getItem("place");
+        let city = localStorage.getItem("city");
+        let country = localStorage.getItem("country");
 
         editDate.innerHTML = date;
         editPlace.value = place;
+        editCity.value = city;
+        editCountry.value = country;
 
         editDateForm.addEventListener("submit", (e) => {e.preventDefault()});
 
         editDateBtn.addEventListener("click", () => {
-
         let date = editDate.innerHTML;
         let place = editPlace.value;
+        let city = editCity.value;
+        let country = editCountry.value;
+        
 
     db.collection("dates").doc(`${date}`).set({
         date: date,
+        city: city,
+        country: country,
         place: place
     })
     .then(() => {

@@ -7,11 +7,11 @@ let today = new Date();
   
   
   if(todayDay < 10 && todayMonth < 10){
-      todayDate = `${todayYear}-0${todayMonth+1}-0${todayDay}`;
+      todayDate = `0${todayDay}-0${todayMonth+1}-${todayYear}`;
   } else if(todayDay < 10){
-      todayDate = `${todayYear}-${todayMonth+1}-0${todayDay}`;
+      todayDate = `0${todayDay}-${todayMonth+1}-${todayYear}`;
   } else if(todayMonth < 10){
-      todayDate = `${todayYear}-0${todayMonth+1}-${todayDay}`;
+      todayDate = `${todayDay}-0${todayMonth+1}-${todayYear}`;
   } else {
-      todayDate = `${todayYear}-${todayMonth+1}-${todayDay}`;
+      todayDate = `${todayDay}-${todayMonth+1}-${todayYear}`;
   }
