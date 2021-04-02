@@ -15,7 +15,16 @@
 }
 
 body{
+    height: 3000px;
     background: url("../images/home-bg.png");
+}
+
+.hidden{
+    display: none;
+}
+
+.hidden-cross{
+    opacity: 0;
 }
 
 .logo{
@@ -34,14 +43,33 @@ body{
 
 .menu-btn .stick{
     background-color: white;
-    width: 41px;
+    width: 58px;
     height: 1px;
 }
 
+.cross{
+    position: fixed;
+    opacity: 1;
+    top: 45px;
+    right: 80px;
+    z-index: 999;
+    
+}
+
 header{
+    display: fixed;
     background-color: #2A4190;
     height: 100vh;
+    width: 100%;
     text-align: center;
+    transform: none;
+    clip-path: inset(0 0 100% 0);
+    transition: all 1s ease-out;
+    z-index: 0;
+}
+
+header.open{
+    clip-path: inset(0 0 0 0);
 }
 
 .header-header{
@@ -52,6 +80,7 @@ header{
 }
 
 nav ul li{
+    width: auto;
     font-family: "Vex Outline";
     list-style: none;
     font-size: 4rem;
@@ -78,4 +107,3 @@ nav ul li:hover{
     margin-top: 35px !important;
     background-color: black;
 }
-

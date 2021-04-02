@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link href="../../modules/font-awesome/css/all.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="./style/index.css" type="text/css">
@@ -12,11 +13,13 @@
 <body>
     <a href="#" class="logo"><img src="./images/logo.png" alt="logo"></a>
     <div class="menu-btn">
-        <div class="stick mb-3"></div>
+        <div class="stick mb-4"></div>
         <div class="stick"></div>
-        <div class="stick mt-3"></div>
+        <div class="stick mt-4"></div>
     </div>
-    <header>
+    <header class="fixed-top">
+        <a href="#" class="logo"><img src="./images/logo.png" alt="logo"></a>
+        <img class="cross animate__animated" src="./images/cross.png" alt="cross">
         <div class="header-header"></div>
         <nav class="d-flex flex-column align-items-center mt-5">
             <ul>
@@ -39,8 +42,10 @@
             </div>
         </div>
     </header>
-    <main>
-
+    <main style="display: absolute; z-index: 1;">
+        <div class="d-flex flex-column align-items-center">
+        <iframe width="800" height="450" style="margin-top: 370px" src="https://www.youtube.com/embed/Q4MLaOv-9G0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
     </main>
     <footer>
         
