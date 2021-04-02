@@ -124,6 +124,49 @@ nav ul li:hover{
     height: 80px;
     background-color: rgb(0, 0, 0, 0);
     border: 2px solid #E7498D;
+    transition: 0.3s;
+}
+
+.reserve-btn:hover{
+    background-color: #E7498D;
+}
+
+.event-btn{
+    width: 370px;
+    height: 60px;
+    background-color: rgb(0, 0, 0, 0);
+    border: 2px solid #E7498D;
+    transition: 0.3s;
+}
+
+.event-btn:hover{
+    background-color: #E7498D;
+}
+
+.card{
+    margin: 25px;
+    width: 440px;
+    height: 490px;
+    background: rgb(0, 0, 0, 0);
+    border: none;
+    overflow: hidden;
+}
+
+.card p{
+    width: 370px;
+    height: 110px;
+    margin: 0;
+    background-color: #000B35;
+    color: white;
+}
+
+.card .img{
+    background: rgb(0, 0, 0, 0);
+    border: 1px solid white;
+    width: 440px;
+    height: 335px;
+    overflow: hidden;
+    
 }
 
 footer{
@@ -144,4 +187,24 @@ footer{
 footer img{
     border: 2px solid white;
     border-radius: 50%;
+}
+
+.blog-btn{
+    width: 370px;
+    height: 60px;
+    background-color: #E7498D;
+    border: 2px solid #E7498D;
+    transition: 0.3s;
+}
+
+.blog-btn:hover{
+    background-color: rgb(0, 0, 0, 0);
+}
+
+.text-tracklist h2{
+    font-size: 1rem;
+}
+
+.text-tracklist h3{
+    font-size: 1rem;
 }
