@@ -137,6 +137,7 @@ nav ul li:hover{
     background-color: rgb(0, 0, 0, 0);
     border: 2px solid #89358B;
     transition: 0.3s;
+    font-size: 1.5rem;
 }
 
 .event-btn:hover{
@@ -218,3 +219,19 @@ footer img{
     border-radius: 50%;
 }
 
+.insta-lafemme{
+    margin-top: 150px;
+    margin-bottom: 150px;
+}
+
+.insta-lafemme h2{
+    margin-bottom: 100px;
+}
+
+.insta-lafemme > a{
+    margin-bottom: 200px;
+}
+
+.insta-lafemme > div img{
+    width: 100px;
+}
