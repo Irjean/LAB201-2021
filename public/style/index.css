@@ -1,121 +1,10 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-@font-face{
-    font-family: "Vex Solid";
-    src: url("../fonts/vex/VEX_SOLID.otf");
-}
-
-@font-face{
-    font-family: "Vex Outline";
-    src: url("../fonts/vex/VEX_OUTLINE.otf");
-}
-
-@font-face{
-    font-family: "Futura";
-    src: url("../fonts/futura/FuturaMediumBT.ttf");
-}
-
 body{
-    background: url("../images/home-bg.png");
-    
+    background: url("../images/home-bg.png");   
 }
 
 main{
     font-family: "Futura";
     color: white;
-}
-
-.hidden{
-    display: none;
-}
-
-.hidden-cross{
-    opacity: 0;
-}
-
-.logo{
-    position: fixed;
-    top: 40px;
-    left: 80px;
-    z-index: 999;
-}
-
-.menu-btn{
-    position: fixed;
-    right: 80px;
-    top: 45px;
-    z-index: 999;
-}
-
-.menu-btn .stick{
-    background-color: white;
-    width: 58px;
-    height: 1px;
-}
-
-.cross{
-    position: fixed;
-    opacity: 1;
-    top: 45px;
-    right: 80px;
-    z-index: 999;
-    
-}
-
-header{
-    display: fixed;
-    background-color: #2A4190;
-    height: 100vh;
-    width: 100%;
-    text-align: center;
-    transform: none;
-    clip-path: inset(0 0 100% 0);
-    transition: all 1s ease-out;
-    z-index: 0;
-}
-
-header.open{
-    clip-path: inset(0 0 0 0);
-}
-
-.header-header{
-    height: 143px;
-    background-color: #243781;
-    box-shadow: 0px -5px 10px 5px rgba(0,0,0,0.75);
-    z-index: 999;
-}
-
-nav ul li{
-    width: auto;
-    font-family: "Vex Outline";
-    list-style: none;
-    font-size: 4rem;
-    cursor: pointer;
-}
-
-nav ul li:hover{
-    font-family: "Vex Solid";
-}
-
-.below-nav{
-    margin: auto;
-}
-
-.below-nav .stick1{
-    width: 700px;
-    height: 1px;
-    background-color: black;
-}
-
-.below-nav .stick2{
-    width: 450px;
-    height: 1px;
-    margin-top: 35px !important;
-    background-color: black;
 }
 
 .reserve-btn{
@@ -128,7 +17,7 @@ nav ul li:hover{
 }
 
 .reserve-btn:hover{
-    background-color: #89358B;
+    background-color: #E7498D;
 }
 
 .event-btn{
@@ -168,7 +57,6 @@ nav ul li:hover{
     width: 440px;
     height: 335px;
     overflow: hidden;
-    
 }
 
 .blog-btn, .preorder-btn{
@@ -192,44 +80,17 @@ nav ul li:hover{
     font-size: 1rem;
 }
 
-footer{
-    font-family: "Futura";
-}
-
-.newsletter input, .newsletter button{
-    background-color: rgb(0, 0, 0, 0);
-    color: white;
-    border: 1px solid white;
-    font-size: 1.5rem;
-    transition: 0.3s;
-}
-
-.newsletter button:hover{
-    background-color: white;
-    color: #243781;
-}
-
-.bottom-footer > div span{
-    cursor: pointer;
-    margin: 10px;
-}
-
-footer img{
-    border: 2px solid white;
-    border-radius: 50%;
-}
-
 .insta-lafemme{
     margin-top: 150px;
     margin-bottom: 150px;
 }
 
 .insta-lafemme h2{
-    margin-bottom: 100px;
+    margin-bottom: 130px;
 }
 
 .insta-lafemme > a{
-    margin-bottom: 200px;
+    margin-bottom: 100px;
 }
 
 .insta-lafemme > div img{

@@ -102,13 +102,13 @@
 
         editArticleBtn.addEventListener("click", () => {
 
-            return
     let date = editID.innerHTML;
     let image = imgURL;
     let title = editTitle.value;
-    let article = editArticle.value;
+    let article = tinyMCE.activeEditor.getContent();;
 
-    db.collection("articles").doc(`${date}`).set({
+    db.collection("articles").doc(`${dateNum}`).set({
+        dateNum: dateNum,
         date: date,
         image: image,
         titre: title,
@@ -116,12 +116,13 @@
     })
     .then(() => {
         alert("Article modifié avec succés !");
+        window.location.href = "./adminBlog.html";
     })
     .catch((error) => {
         alert("Erreur lors de la modification de l'article: ", error);
     });
 
-    window.location.href = "./adminBlog.html";
+    
 })
 
 editArticleImg.addEventListener("change", () => {

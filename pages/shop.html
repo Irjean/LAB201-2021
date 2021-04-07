@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="../modules/font-awesome/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../style/style.css" type="text/css">
+    <link rel="stylesheet" href="../style/blogPage.css">
+    <title>Site principal</title>
+</head>
+<body>
+    <div class="cookie hidden d-flex fixed-bottom text-white align-items-center text-center justify-content-center p-3" style="height: 60px; background: rgba(131, 151, 238, 0.5); border-top: 2px solid white;"><span class="m-3">En naviguant sur notre site vous acceptez l'utilisation des cookies.</span><button class="cookie-btn" style="width: 50px; height: 30px; background: rgb(0, 0, 0, 0); color: white; border: 1px solid white; border-radius: 10px;">Ok</button></div>
+    <a href="#" class="logo"><img src="../images/logo.png" alt="logo"></a>
+    <div class="menu-btn">
+        <div class="stick mb-4"></div>
+        <div class="stick"></div>
+        <div class="stick mt-4"></div>
+    </div>
+    <header class="fixed-top">
+        <a href="#" class="logo"><img src="../images/logo.png" alt="logo"></a>
+        <img class="cross animate__animated" src="../images/cross.png" alt="cross">
+        <div class="header-header"></div>
+        <nav class="d-flex flex-column align-items-center mt-5">
+            <ul>
+                <a href="../index.html"><li>HOME</li></a>
+                <a href="../pages/event.html"><li>EVENEMENTS</li></a>
+                <a href="../pages/blog.html"><li>BLOG</li></a>
+                <a href="#"><li>BOUTIQUE</li></a>
+                <a href="../pages/tickets.html"><li>TICKETS</li></a>
+            </ul>
+        </nav>
+        <div class="below-nav">
+            <div class="stick1 m-auto"></div>
+            <div class="stick2 m-auto"></div>
+        </div>
+        <div class="mt-3">
+            <span><b>Retrouvez-nous sur :</b></span>
+            <div class="mt-5 m-auto d-flex justify-content-around" style="width: 10%;">
+                <a href="https://www.instagram.com/la_femme_le_paradigme/" target="_blank"><img src="../images/insta.png" alt="insta"></a>
+                <a href="https://www.tiktok.com/@paaradigme?lang=fr" target="_blank"><img src="../images/tiktok.png" alt="tiktok"></a>
+            </div>
+        </div>
+    </header>
+    <footer class="d-flex flex-column align-items-center text-white mt-5 mb-5">
+        <section class="d-flex flex-column align-items-center mb-5">
+        <span class="w-75 text-center mb-2">Inscrivez-vous à notre Newsletter pour vous tenir au courant des différents évènements, challenge et concerts de La Femme</span>
+        <div class="newsletter mt-2"><input type="text" class="text-white" style="width: 570px; height: 65px; padding-left: 20px;" placeholder="Exemple_Adresse@email.com"><button style="width: 181px; height: 65px;">SIGN UP</button></div>
+        </section>
+        <hr class="text-white" style="width: 90%; height: 1px; opacity: 1;">
+        <section class="bottom-footer d-flex flex-column align-items-center mt-5">
+            <div><span><u>Mention Légales</u></span>|<span><u>Politiques de protection des données personnelles</u></span>|<span><u>Cookies</u></span></div>
+            <hr>
+            <div class="d-flex justify-content-around align-items-center w-50">
+                <a href="https://www.instagram.com/la_femme_le_paradigme/" target="_blank"><img src="../images/insta.png" alt="insta"></a>
+                <a href="https://www.tiktok.com/@paaradigme?lang=fr" target="_blank"><img src="../images/tiktok.png" alt="tiktok"></a>
+            </div>
+        </section>
+        <span style="position: relative; left: 35%;">@Designed and hosted by Smile Studio, 2021</span>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="../modules/font-awesome/js/all.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-storage.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+          apiKey: "AIzaSyCtr0RkMGMJAbCJaEyWipLjPKeMmMK28dI",
+          authDomain: "lab201-2021.firebaseapp.com",
+          projectId: "lab201-2021",
+          storageBucket: "lab201-2021.appspot.com",
+          messagingSenderId: "166186580563",
+          appId: "1:166186580563:web:9a455becfc415a040ce4a6",
+          measurementId: "G-CT4FPZXR6D"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        
+        var db = firebase.firestore();
+
+    </script>
+    <script src="../js/app.js"></script>
+</body>
+</html>
