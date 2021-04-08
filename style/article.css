@@ -1,0 +1,44 @@
+body{
+    background: url("../images/bg.png");
+}
+
+#back-btn{
+    position: fixed;
+    background-color: #89358B;
+    color: white;
+    border: none;
+    height: 60px;
+    width: 10%;
+    bottom: 20px;
+    left: 20px;
+    z-index: 999;
+}
+
+#article-image{
+    border-bottom: 1px solid black;
+}
+
+.title{
+    position: absolute;
+    background-color: white;
+    width: 50%;
+    padding: 2%;
+    left: 50%;
+    top: 40%;
+    transform:translateX(-50%);
+    border: 2px solid black;
+}
+
+.title h1{
+    margin: 0 !important;
+    color: black !important;
+    text-align: center;
+    font-family: "Vex Solid";
+}
+
+section article{
+    background-color: white;
+    color: black;
+    padding: 5%;
+    border: 2px solid black;
+}

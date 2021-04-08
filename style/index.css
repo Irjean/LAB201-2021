@@ -33,32 +33,6 @@ main{
     background-color: #89358B;
 }
 
-.card{
-    margin: 25px;
-    width: 440px;
-    height: 490px;
-    background: rgb(0, 0, 0, 0);
-    border: none;
-    overflow: hidden;
-}
-
-.card p{
-    width: 370px;
-    height: 110px;
-    margin: 0;
-    background-color: #000B35;
-    color: white;
-    padding: 5px;
-}
-
-.card .img{
-    background: rgb(0, 0, 0, 0);
-    border: 1px solid white;
-    width: 440px;
-    height: 335px;
-    overflow: hidden;
-}
-
 .blog-btn, .preorder-btn{
     font-size: 1.5rem;
     width: 370px;

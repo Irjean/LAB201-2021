@@ -2,3 +2,22 @@ body{
     height: 100vh;
 background: url("../images/bg.png")
 }
+
+.line{
+    background-color: #89358B;
+    height: 1px;
+    width: 40%;
+}
+
+.more-article{
+    height: 50px;
+    width: 20%;
+    background-color: #89358B;
+    color: white;
+    font-size: 2rem;
+    border: none;
+}
+
+.card{
+    margin: 0;
+}

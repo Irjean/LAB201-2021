@@ -56,16 +56,33 @@
         </section>
         <section class="d-flex flex-column align-items-center">
             <div class="mt-5 d-flex align-items-center">
-            <div class="card d-flex flex-column align-items-center text-center"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde debitis dicta voluptatum soluta, voluptas cum earum delectus rem sapiente aperiam.
-            </p><div class="img d-flex align-items-center justify-content-center"><img src="./images/banner1.png" alt="img"></img></div></div>
+               <a href="" onclick="redirectArticle(event)"> <div id="first-card" class="card d-flex flex-column align-items-center text-center">
+                    <p>
+                        
+                    </p>
+                    <div class="img d-flex align-items-center justify-content-center">
+                        <img src="" alt="img"></img>
+                    </div>
+                </div></a>
 
-            <div class="card d-flex flex-column align-items-center text-center" style="margin-bottom: 10%;">
-                <div class="img d-flex align-items-center justify-content-center"><img src="./images/banner2.png" alt="img"></img></div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde debitis dicta voluptatum soluta, voluptas cum earum delectus rem sapiente aperiam.</p>
-               </div>
-            
-            <div class="card d-flex flex-column align-items-center text-center"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde debitis dicta voluptatum soluta, voluptas cum earum delectus rem sapiente aperiam.
-            </p><div class="img d-flex align-items-center justify-content-center"><img src="./images/banner3.png" alt="img"></img></div></div>
+                <a href="" onclick="redirectArticle(event)"><div id="second-card" class="card d-flex flex-column align-items-center text-center" style="margin-bottom: 10%;">
+                    <div class="img d-flex align-items-center justify-content-center">
+                        <img src="" alt="img"></img>
+                    </div>
+                    <p>
+                        
+                    </p>
+                </div></a>
+                
+                <a href="" onclick="redirectArticle(event)"><div id="third-card" class="card d-flex flex-column align-items-center text-center">
+                    <p>
+                        
+                    </p>
+                    <div class="img d-flex align-items-center justify-content-center">
+                        <img src="" alt="img"></img>
+                    </div>
+                </div></a>
+
             </div>
             <div class="d-flex align-items-center">
                 <div style="width: 337px; height: 1px; background-color: #E7498D;"></div><a href="./pages/blog.html"><button class="blog-btn text-white m-3">VOIR PLUS D'ARTICLES</button></a><div style="width: 337px; height: 1px; background-color: #E7498D;"></div>
@@ -139,5 +156,57 @@
 
     </script>
     <script src="js/app.js"></script>
+    <script>
+        window.onload = () => {
+            db.collection("articles").get()
+            .then((querySnapshot) => {
+                let articles = []
+                querySnapshot.forEach((doc) => {
+                    articles.push(doc.data())
+                })
+                let one = articles[0];
+                let two = articles[1];
+                let three = articles[2];
+                
+                firstCard.childNodes[3].childNodes[1].src = one.image;
+                secondCard.childNodes[1].childNodes[1].src = two.image;
+                thirdCard.childNodes[3].childNodes[1].src = three.image;
+
+                firstCard.childNodes[1].innerHTML = one.titre;
+                secondCard.childNodes[3].innerHTML = two.titre;
+                thirdCard.childNodes[1].innerHTML = three.titre;
+
+                firstCard.setAttribute("value", one.dateNum);
+                secondCard.setAttribute("value", two.dateNum);
+                thirdCard.setAttribute("value", three.dateNum);
+
+                firstCard.parentNode.setAttribute("value", one.dateNum);
+                secondCard.parentNode.setAttribute("value", two.dateNum);
+                thirdCard.parentNode.setAttribute("value", three.dateNum);
+
+            })
+        }
+
+        const firstCard = document.querySelector("#first-card");
+        const secondCard = document.querySelector("#second-card");
+        const thirdCard = document.querySelector("#third-card");
+
+        function redirectArticle(e){
+    e.preventDefault();
+    console.log(e.target.parentNode.parentNode);
+    let dateNum = e.target.parentNode.parentNode.getAttribute("value");
+    console.log(dateNum)
+
+    db.collection("articles").doc(dateNum).get()
+    .then((doc) => {
+        data = doc.data();
+        localStorage.setItem("dateNum", dateNum);
+        localStorage.setItem("img", data.image);
+        localStorage.setItem("title", data.titre);
+        localStorage.setItem("article", data.article);
+        window.open("./pages/article.html");
+    })
+} 
+    </script>
 </body>
 </html>

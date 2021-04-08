@@ -4,14 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link href="../modules/font-awesome/css/all.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="../style/style.css" type="text/css">
-    <link rel="stylesheet" href="../style/blogPage.css">
-    <title>Site principal</title>
+    <link href="../../modules/font-awesome/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/article.css">
+    <title>Prévisualisation D'Article</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 </head>
 <body>
+    <main>
     <div class="cookie hidden d-flex fixed-bottom text-white align-items-center text-center justify-content-center p-3" style="height: 60px; background: rgba(131, 151, 238, 0.5); border-top: 2px solid white;"><span class="m-3">En naviguant sur notre site vous acceptez l'utilisation des cookies.</span><button class="cookie-btn" style="width: 50px; height: 30px; background: rgb(0, 0, 0, 0); color: white; border: 1px solid white; border-radius: 10px;">Ok</button></div>
     <a href="#" class="logo"><img src="../images/logo.png" alt="logo"></a>
     <div class="menu-btn">
@@ -19,6 +25,7 @@
         <div class="stick"></div>
         <div class="stick mt-4"></div>
     </div>
+    <a href="../pages/blog.html"><button id="back-btn">RETOUR</button></a>
     <header class="fixed-top">
         <a href="#" class="logo"><img src="../images/logo.png" alt="logo"></a>
         <img class="cross animate__animated" src="../images/cross.png" alt="cross">
@@ -27,7 +34,7 @@
             <ul>
                 <a href="../index.html"><li>HOME</li></a>
                 <a href="../pages/event.html"><li>EVENEMENTS</li></a>
-                <a href="#"><li>BLOG</li></a>
+                <a href="../pages/blog.html"><li>BLOG</li></a>
                 <a href="../pages/shop.html"><li>BOUTIQUE</li></a>
                 <a href="../pages/tickets.html"><li>TICKETS</li></a>
             </ul>
@@ -44,18 +51,15 @@
             </div>
         </div>
     </header>
-    <main>
-        <section class="d-flex flex-column align-items-center" style="margin-top: 10%;">
-            <h1 class="text-center text-white" style="font-family: 'Vex Solid'; font-size: 4rem; margin-bottom: 5%;">BLOG</h1>
-            <div class="d-flex justify-content-around w-75">
-                <div class="line-one" style="margin-right: 10%;">
-
+        <section class="d-flex flex-column align-items-center">
+                <div id="article-image" style="width: 100%; height: 500px;">
+                    <div class="title">
+                        <h1 id="article-title" style="color: white; margin-top: 100px;"></h1>
+                    </div>
                 </div>
-                <div class="line-two" style="margin-top: 10%;">
-
-                </div>
-            </div>
-            <div class="d-flex align-items-center w-100"><div class="line"></div><button class="more-article">À Venir</button><div class="line"></div></div>
+            <article id="article-content">
+                
+            </article>
         </section>
     </main>
     <footer class="d-flex flex-column align-items-center text-white mt-5 mb-5">
@@ -74,14 +78,14 @@
         </section>
         <span style="position: relative; left: 35%;">@Designed and hosted by Smile Studio, 2021</span>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-    <script src="../modules/font-awesome/js/all.min.js"></script>
+    <script src="../../modules/font-awesome/js/all.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-storage.js"></script>
+    <script src="../js/app.js"></script>
     <script>
         // Your web app's Firebase configuration
         // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -97,68 +101,22 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
-
-        
         var db = firebase.firestore();
-
+        var storage = firebase.storage();
     </script>
-    <script src="../js/app.js"></script>
     <script>
-    window.onload = () => {
-        db.collection("articles").get()
-        .then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                let data = doc.data();
-                if(switcher === true){
-                    firstLine.innerHTML += createCard(data);
-                    switchLine();
-                } else {
-                    secondLine.innerHTML += createCard(data);
-                    switchLine();
-                }
-            });
-        });
-    };
+const articleImg = document.querySelector("#article-image");
+const articleTitle = document.querySelector("#article-title");
+const articleContent = document.querySelector("#article-content");
 
-    const firstLine = document.querySelector(".line-one");
-    const secondLine = document.querySelector(".line-two");
+let title = localStorage.getItem("title");
+let imgURL = localStorage.getItem("img");
+let article = localStorage.getItem("article");
 
-    let switcher = true;
-
-    function switchLine(){
-        switcher = !switcher
-    }
-
-    function createCard(doc){
-        return`
-        <a href="" onclick="redirectArticle(event)">
-            <div class="card d-flex flex-column align-items-center text-center" value="${doc.dateNum}">
-                <div class="img d-flex align-items-center justify-content-center" value="${doc.dateNum}">
-                    <img src="${doc.image}" alt="img"></img>
-                </div>
-                <p>
-                    ${doc.titre}
-                </p>
-            </div>
-        </a>
-                    `
-    }
-
-    function redirectArticle(e){
-    e.preventDefault();
-    let dateNum = e.target.parentNode.getAttribute("value");
-
-    db.collection("articles").doc(dateNum).get()
-    .then((doc) => {
-        data = doc.data();
-        localStorage.setItem("dateNum", dateNum);
-        localStorage.setItem("img", data.image);
-        localStorage.setItem("title", data.titre);
-        localStorage.setItem("article", data.article);
-        window.location.href = "./article.html";
-    })
-} 
-  
-    </script>
+let imgStyle = articleImg.getAttribute("style");
+articleImg.setAttribute("style", `${imgStyle} background: url(${imgURL})`);
+articleTitle.innerHTML = title;
+articleContent.innerHTML = article;
+</script>
 </body>
 </html>
