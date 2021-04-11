@@ -1,0 +1,66 @@
+body{
+    background: url("../images/shop-bg.png");
+}
+
+#top-shop{
+    margin-top: 10%;
+}
+
+#bottom-shop{
+    margin-bottom: 15%;
+}
+
+.buttons{
+    margin-bottom: 5%;
+}
+
+.buttons button{
+    width: 362px;
+    height: 84px;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.active-btn{
+    color: white;
+    background-color: black;
+    border: none;
+}
+
+.unactive-btn{
+    color: black;
+    background-color: rgb(0, 0, 0, 0);
+    border: 1px solid black;
+    transition: 0.3s ease-in;
+}
+
+.unactive-btn:hover{
+    color: white;
+    background-color: black;
+    border: 1px solid white;
+}
+
+.shop-card{
+    color: white;
+}
+
+.shop-card img{
+    width: 255px;
+    height: 255px;
+    border: 2px solid #89358B;
+    border-bottom: none;
+    border-radius: 0;
+}
+
+.shop-card > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 255px;
+    height: 95px;
+    border: 1px solid white;
+}
+
+.shop-card > div p{
+    margin-top: 20px
+}

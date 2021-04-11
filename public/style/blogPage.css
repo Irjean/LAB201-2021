@@ -3,6 +3,19 @@ body{
 background: url("../images/bg.png")
 }
 
+h2{
+    color: white;
+    font-family: "Futura";
+    font-size: 1.5rem;
+    margin-bottom: 15%;
+}
+
+.card{
+    height: inherit;
+    margin-bottom: 30%;
+    border-radius: 0;
+}
+
 .line{
     background-color: #89358B;
     height: 1px;
@@ -10,14 +23,10 @@ background: url("../images/bg.png")
 }
 
 .more-article{
-    height: 50px;
+    height: 80px;
     width: 20%;
     background-color: #89358B;
     color: white;
     font-size: 2rem;
     border: none;
-}
-
-.card{
-    margin: 0;
 }

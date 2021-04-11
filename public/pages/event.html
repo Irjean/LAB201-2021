@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link href="../modules/font-awesome/css/all.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="../style/style.css" type="text/css">
-    <link rel="stylesheet" href="../style/blogPage.css">
+    <link rel="stylesheet" href="../style/event.css">
     <title>Site principal</title>
 </head>
 <body>
@@ -44,6 +44,21 @@
             </div>
         </div>
     </header>
+    <main>
+        <section id="section-chrono" class="d-flex flex-column align-items-center">
+            <h1>EVENEMENTS</h1>
+            <h2>LIVE CONCERT A DISTANCE LE 20 AVRIL 2021</h2>
+            <div class="inputs d-flex align-items-center mt-5"><input type="text" placeholder="Exemple_Adresse@gmail.com"><div class="d-flex align-items-center"><button class="reminder">ME LE RAPPELER</button><button class="reminder-icon"><i class="fas fa-caret-right"></i></button></div></div>
+            <div class="chrono d-flex align-items-center justify-content-center"></div>
+            <div class="d-flex align-items-center mt-5 mb-5"><div class="d-flex flex-column align-items-center"><div class="mb-1" style="width: 40px; height: 1px; background-color: #E7498D;"></div><div style="width: 20px; height: 1px; background-color: #E7498D;"></div></div><a href="./tickets.html"><button class="reserve-btn m-3 text-white" style="font-size: 2rem;">RÉSERVEZ VOTRE PASS</button></a><div class="d-flex flex-column align-items-center"><div class="mb-1" style="width: 40px; height: 1px; background-color: #E7498D;"></div><div style="width: 20px; height: 1px; background-color: #E7498D;"></div></div></div>
+        </section>
+        <section id="section-dates" class="d-flex flex-column align-items-center">
+            <h2 class="text-center w-50">RÉSERVEZ VOS PLACES POUR LA TOURNÉE DE LA FEMME PARTOUT EN FRANCE ET AILLEURS</h2>
+            <div id="date-table" class="d-flex flex-column align-items-center">
+                <div class="d-flex"><div class="case">DATE</div><div class="case">LIEU</div><div class="case"></div></div>
+            </div>
+        </section>
+    </main>
     <footer class="d-flex flex-column align-items-center text-white mt-5 mb-5">
         <section class="d-flex flex-column align-items-center mb-5">
         <span class="w-75 text-center mb-2">Inscrivez-vous à notre Newsletter pour vous tenir au courant des différents évènements, challenge et concerts de La Femme</span>
@@ -89,5 +104,94 @@
 
     </script>
     <script src="../js/app.js"></script>
+    <script>
+        // Set the date we're counting down to
+        var countDownDate = new Date("Apr 21, 2021 21:00:00").getTime();
+        
+        // Update the count down every 1 second
+        var x = setInterval(function() {
+        
+          // Get today's date and time
+          var now = new Date().getTime();
+            
+          // Find the distance between now and the count down date
+          var distance = countDownDate - now;
+            
+          // Time calculations for days, hours, minutes and seconds
+          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+          // Output the result in an element with id="demo"
+          document.querySelector(".chrono").innerHTML = days + "D " + hours + "H "
+          + minutes + "M " + seconds + "S ";
+            
+          // If the count down is over, write some text 
+          if (distance < 0) {
+            clearInterval(x);
+            document.querySelector(".chrono").innerHTML = " ";
+          }
+        }, 1000);
+        </script>
+        <script>
+        const dateTable = document.querySelector("#date-table");
+
+        const fullDate = {
+            days: {
+                Mon: "Lundi",
+                Tue: "Mardi",
+                Wed: "Mercredi",
+                Thu: "Jeudi",
+                Fri: "Vendredi",
+                Sat: "Samedi",
+                Sun: "Dimanche"
+            },
+            months: {
+                Jan: "Janvier",
+                Feb: "Février",
+                Mar: "Mars",
+                Apr: "Avril",
+                May: "Mai",
+                Jun: "Juin",
+                Jul: "Juillet",
+                Aug: "Aout",
+                Sep: "Septembre",
+                Oct: "Octobre",
+                Nov: "Novembre",
+                Dec: "Décembre"
+            }
+        }
+
+            db.collection("dates").get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    let data = doc.data();
+                    let html = addDateCase(data);
+                    dateTable.innerHTML += html
+                    });
+                });
+
+            function addDateCase(data){
+                let stringDate = data.date.toString().split("-").join(", ");
+                let formatedDate = new Date(stringDate).toString().split(" ");
+                formatedDate = formatedDate.slice(0, 4, formatedDate.length);
+                let day = formatedDate[0];
+                let month = formatedDate[1];
+                formatedDate[0] = fullDate.days[day];
+                formatedDate[1] = fullDate.months[month];
+                let orderedDate = [formatedDate[0], formatedDate[2], formatedDate[1], formatedDate[3]].join(" ");
+                
+                if(data.full === false){
+                    return `
+                    <div class="d-flex"><div class="case-date">${orderedDate}</div><div class="case-date">${data.country}, ${data.city}, ${data.place}</div><div class="case" onclick="window.location.href ='./tickets.html'"><button>RÉSERVER</button></div></div>
+                    `
+                } else {
+                    return`
+                    <div class="d-flex"><div class="case-date">${orderedDate}</div><div class="case-date">${data.place}</div><div class="case-full"><button>COMPLET</button></div></div>
+                    `
+                }
+            }
+        </script>
 </body>
 </html>

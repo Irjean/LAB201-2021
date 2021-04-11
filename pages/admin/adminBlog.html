@@ -132,7 +132,6 @@
 
     blogPage.addEventListener("click", (e)=>{
     date = e.target.value;
-    console.log(date)
 if(e.target.id === "delete-button"){
     tdToDelete = e.target.parentNode.parentNode.parentNode;
     $('#deleteModal').modal('show');
@@ -182,7 +181,7 @@ if(e.target.id === "edit-button"){
                             <td width="100px">${i.date}</td>
                             <td width="210px"><img src="${i.image}" alt="image" width="200px"></td>
                             <td width="735px">${i.titre}</td>
-                            <td><div class="d-flex flex-column mt-3" style="margin-right: 4px"><button value="${i.dateNum.toString()}" id="edit-button" class="button btn-success p-1 m-auto mb-2" style="width: 74px;">EDITER</button><button value="${i.dateNum.toString()}" id="delete-button" data-toggle="modal" data-target="#deleteModal" class="button btn-danger p-1 m-auto" style="width: 110px;">SUPPRIMER</button></div></td>
+                            <td><div class="d-flex flex-column mt-3" style="margin-right: 4px"><button value="${i.dateNum.toString()}" id="edit-button" class="button btn-success p-1 m-auto mb-2" style="width: 74px;" value="${i.dateNum.toString()}"><i class="fas fa-pen"></i></button><button value="${i.dateNum.toString()}" id="delete-button" data-toggle="modal" data-target="#deleteModal" class="button btn-danger p-1 m-auto" style="width: 110px;"><i class="far fa-trash-alt"></i></button></div></td>
                         </tr>
         `;
     }).join("");

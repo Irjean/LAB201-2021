@@ -39,7 +39,7 @@
         <input id="edit-article-image" class="w-50 mb-2" type="file">
         <h3 class="mb-2">Article</h3>
         <textarea id="edit-article-article" style="height: 300px; text-align: start; margin-bottom: 10px; text-align: center;" type="text" autocomplete="off"></textarea>
-        <a href="#"><button id="edit-article-btn" class="button btn-primary w-25">Modifier</button></a>
+        <a href="#" class="mt-3"><button id="edit-article-btn" class="button btn-primary w-25" style="margin-top: 10px;">Modifier</button></a><button id="preview-button" class="button btn-outline-primary w-25" style="margin-left: 10px; margin-top: 10px;">Prévisualiser</button>
         </form>
         </section>
     </main>
@@ -81,6 +81,7 @@
         const editArticleBtn = document.querySelector("#edit-article-btn");
         const editArticlePage = document.querySelector("#edit-article-page");
         const editArticleForm = document.querySelector("#edit-article-form");
+        const previewBtn = document.querySelector("#preview-button");
 
         let dateNum = localStorage.getItem("dateNum");
         let date = localStorage.getItem("date");
@@ -105,7 +106,7 @@
     let date = editID.innerHTML;
     let image = imgURL;
     let title = editTitle.value;
-    let article = tinyMCE.activeEditor.getContent();;
+    let article = tinyMCE.activeEditor.getContent();
 
     db.collection("articles").doc(`${dateNum}`).set({
         dateNum: dateNum,
@@ -125,29 +126,44 @@
     
 })
 
-editArticleImg.addEventListener("change", () => {
-    editPreviewImg.innerHTML = '<i class="fas fa-spinner spin"></i>'
-    let image = editArticleImg.files[0];
-    let imgPath = `images/${image.name}`;
-    let imageStorage = firebase.storage().ref(imgPath);
-    let uploadImg = imageStorage.put(image);
-    uploadImg.on("state_changed", 
-    () => {
-        //Pendant l'upload
-        
-    },
-    (error) => {
-        //Erreur
-    },
-    () => {
-        //Succes
-        imageStorage.getDownloadURL()
-    .then((url) => {
-        imgURL = url;
-        editPreviewImg.innerHTML = `<img height="200px" src="${imgURL}" alt="minecraft">`
+    editArticleImg.addEventListener("change", () => {
+        editPreviewImg.innerHTML = '<i class="fas fa-spinner spin"></i>'
+        let image = editArticleImg.files[0];
+        let imgPath = `images/${image.name}`;
+        let imageStorage = firebase.storage().ref(imgPath);
+        let uploadImg = imageStorage.put(image);
+        uploadImg.on("state_changed", 
+        () => {
+            //Pendant l'upload
+            
+        },
+        (error) => {
+            //Erreur
+        },
+        () => {
+            //Succes
+            imageStorage.getDownloadURL()
+        .then((url) => {
+            imgURL = url;
+            editPreviewImg.innerHTML = `<img height="200px" src="${imgURL}" alt="minecraft">`
+        })
+        })
     })
+       
+    previewBtn.addEventListener("click", () => {
+        let date = editID.innerHTML;
+        let image = imgURL;
+        let title = editTitle.value;
+        let article = tinyMCE.activeEditor.getContent();
+
+        localStorage.setItem("date", date);
+        localStorage.setItem("img", image);
+        localStorage.setItem("title", title);
+        localStorage.setItem("article", article);
+
+        window.open("./articlePreview.html");
     })
-})
+    
     </script>
 </body>
 </html>

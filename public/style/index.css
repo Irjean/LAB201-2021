@@ -7,19 +7,6 @@ main{
     color: white;
 }
 
-.reserve-btn{
-    font-size: 1.5rem;
-    width: 380px;
-    height: 80px;
-    background-color: rgb(0, 0, 0, 0);
-    border: 2px solid #E7498D;
-    transition: 0.3s;
-}
-
-.reserve-btn:hover{
-    background-color: #E7498D;
-}
-
 .event-btn{
     width: 370px;
     height: 60px;

@@ -38,6 +38,8 @@
             <input id="edit-date-country" class="w-25 mb-3" type="text">
             <h3 class="mb-2">Lieux</h3>
             <input id="edit-date-place" class="w-25 mb-3" type="text">
+            <h3 class="mb-2">Complet ?</h3>
+            <input id="edit-date-full" type="checkbox" style="width: 20px; margin-bottom: 20px">
             <button id="edit-date-btn" class="button btn-primary w-25">Modifier</button>
         </form>
         </section>
@@ -78,6 +80,7 @@
         const editCity = document.querySelector("#edit-date-city")
         const editCountry = document.querySelector("#edit-date-country");
         const editPlace = document.querySelector("#edit-date-place");
+        const editDateFull = document.querySelector("#edit-date-full");
         const editDateForm = document.querySelector("#edit-date-form");
 
         let date = localStorage.getItem("date");
@@ -97,13 +100,15 @@
         let place = editPlace.value;
         let city = editCity.value;
         let country = editCountry.value;
+        let full = editDateFull.checked;
         
 
     db.collection("dates").doc(`${date}`).set({
         date: date,
         city: city,
         country: country,
-        place: place
+        place: place,
+        full: full,
     })
     .then(() => {
         alert("Date modifié avec succés !");

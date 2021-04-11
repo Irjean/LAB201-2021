@@ -38,8 +38,10 @@
             <input id="date-country" class="w-25 mb-2" type="text">
             <h3 class="mb-2">Lieux</h3>
             <input id="date-place" class="w-25 mb-2" type="text">
+            <h3 class="mb-2">Complet ?</h3>
+            <input id="date-full" type="checkbox" style="width: 20px; margin-bottom: 20px">
             <a href="#"><button id="add-date-btn" onclick="addNewDate()" class="button btn-primary w-25">Ajouter</button></a>
-            </form>
+        </form>
         </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
@@ -77,6 +79,7 @@
         const dateCity = document.querySelector("#date-city");
         const dateCountry = document.querySelector("#date-country");
         const datePlace = document.querySelector("#date-place");
+        const dateFull = document.querySelector("#date-full");
         const addDateBtn = document.querySelector("#add-date-btn");
         const dateForm = document.querySelector("#date-form");
 
@@ -90,12 +93,14 @@ let dateValue = dateDate.value;
 let city = dateCity.value;
 let country = dateCountry.value;
 let place = datePlace.value;
+let full = dateFull.checked;
 
 db.collection("dates").doc(`${dateValue}`).set({
     date: dateValue,
     city: city,
     country: country,
-    place: place
+    place: place,
+    full: full,
 })
 .then(() => {
     alert("Date ajouté avec succés !");

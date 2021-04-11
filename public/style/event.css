@@ -1,0 +1,133 @@
+body{
+    background: url("../images/event-bg.png");
+    color: white;
+}
+
+#section-chrono{
+    margin-top: 20%;
+    margin-bottom: 20%;
+}
+
+h1{
+    font-family: "Vex Solid";
+    font-size: 6rem;
+    margin-bottom: 7%;
+}
+
+#section-chrono h2{
+    font-size: 4rem;
+    margin: 0;
+}
+
+.inputs{
+    margin-bottom: 30px;
+}
+
+.inputs input{
+    width: 400px;
+    height: 70px;
+    color: white;
+    background-color: rgb(0, 0, 0, 0);
+    border: 1px solid white;
+    font-size: 1.7rem;
+    text-decoration: underline;
+    padding: 15px;
+    margin-right: 20px;
+}
+
+.reminder{
+    width: 255px;
+    height: 70px;
+    background-color: rgb(0, 0, 0, 0);
+    color: white;
+    border: 1px solid white;
+    font-size: 1.7rem;
+}
+
+.reminder-icon{
+    height: 70px;
+    width: 70px;
+    color: white;
+    background-color: rgb(0, 0, 0, 0);
+    border: 1px solid white;
+    font-size: 2.5rem;
+}
+
+.chrono{
+    background: url("../images/chrono-bg.png");
+    width: 1280px;
+    height: 720px;
+    font-family: "Vex Solid";
+    font-size: 6rem;
+}
+
+#section-dates{
+    margin-bottom: 22%;
+}
+
+#section-dates h2{
+    font-size: 2rem;
+    margin: 0;
+    margin-bottom: 8%;
+}
+
+.case{
+    width: 384px;
+    height: 80px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.case-full{
+    width: 384px;
+    height: 80px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.case button{
+    height: 55px;
+    width: 234px;
+    background-color: #89358B;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    transition: 0.1s ease-in;
+}
+
+.case-full button{
+    height: 55px;
+    width: 234px;
+    background-color: #3d193d;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    transition: 0.1s ease-in;
+}
+
+.case-full button:hover{
+    background-color: black;
+    color: red;
+    border: 1px solid red;
+}
+
+.case button:hover{
+    background-color: rgb(0, 0, 0, 0);
+    color: white;
+    border: 1px solid white;
+}
+
+.case-date{
+    width: 384px;
+    height: 80px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:#28286F;
+    border: 1px solid white;
+}

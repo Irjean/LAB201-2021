@@ -54,6 +54,7 @@
                           <th>Ville</th>
                           <th>Pays</th>
                           <th>Lieux</th>
+                          <th class='text-center'>Complet ?</th>
                           <th></th>
                         </thead>
                         <tbody id="date-list">
@@ -149,13 +150,20 @@ function getDatesFromFirestore(){
 function showDates(dates){
     return dates.map(i => {
         let newDate = i.date.split("-").reverse().join("-");
+        let full;
+        if(i.full === true){
+            full = '<i class="fas fa-check"></i>';
+        } else {
+            full = '<i class="fas fa-times"></i>'
+        }
          return `
          <tr>
                              <td>${newDate}</td>
                              <td>${i.city}</td>
                              <td>${i.country}</td>
                              <td>${i.place}</td>
-                             <td><div class="d-flex flex-column" style="margin-right: 4px"><button value="${i.date}" id="edit-button" class="button btn-success p-1 m-auto mb-2" style="width: 74px;"">EDITER</button><button value="${i.date}" id="delete-button" class="button btn-danger p-1 m-auto" style="width: 110px;">SUPPRIMER</button></div></td>
+                             <td class="text-center">${full}</td>
+                             <td><div class="d-flex flex-column" style="margin-right: 4px"><button value="${i.date}" id="edit-button" class="button btn-success p-1 m-auto mb-2" style="width: 74px;""><i class="fas fa-pen"></i></button><button value="${i.date}" id="delete-button" class="button btn-danger p-1 m-auto"><i class="far fa-trash-alt"></i></button></div></td>
                          </tr>
          `;
      }).join("");

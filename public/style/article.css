@@ -24,7 +24,7 @@ body{
     width: 50%;
     padding: 2%;
     left: 50%;
-    top: 40%;
+    top: 45%;
     transform:translateX(-50%);
     border: 2px solid black;
 }
@@ -39,6 +39,7 @@ body{
 section article{
     background-color: white;
     color: black;
+    margin-top: 3%;
     padding: 5%;
     border: 2px solid black;
 }

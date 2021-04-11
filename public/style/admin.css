@@ -48,12 +48,27 @@ h2{
     display: block;
 }
 
+#logout-btn{
+    position: fixed;
+    bottom: 5%;
+    left: 5%;
+}
+
 .add-article, .add-date, .edit-article-class, .edit-date-class{
     display: flex;
 }
 
-main button{
-    border-radius: 5px;
+#add-article-button-page, #add-date-button-page{
+    width: 100px !important;
+margin-left: 82.2%;
+border-radius: 10px !important;
+height: 30px !important;
+}
+
+#edit-button, #delete-button{
+    border-radius: 50%;
+    width: 40px !important;
+    height: 40px !important;
 }
 
 #edit-button, #delete-button{
@@ -89,5 +104,55 @@ box-shadow: 2px 10px 9px -4px rgba(74,74,74,0.66);
     }
     to{
         transform: rotate(1turn);
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    body{
+        flex-direction: column;
+    }
+
+    aside{
+        flex-direction: row;
+        width: 100%;
+        height: 50vh !important;
+    }
+
+    aside img{
+        display: none;
+    }
+
+    #links{
+        width: 100%;
+        align-items: center;
+        margin-top: 30px !important;
+        height: 50px !important;
+    }
+
+    #blog-button, #dates-button{
+        text-align: center !important;
+    }
+
+    #logout-btn{
+        position: relative !important;
+        margin: auto;
+        margin-top: 10px;
+        width: 138px !important;
+        }
+
+    main{
+        width: 100%;
+    }
+
+    table tr{
+        height: 10px;
+    }
+
+    table td{
+        overflow: scroll;
+    }
+
+    table img{
+        width: 0px;
     }
 }
